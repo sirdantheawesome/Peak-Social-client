@@ -1,11 +1,12 @@
 import React from 'react'
 import { useForm } from '../../hooks/useForm'
-// import { useHistory } from 'react-router'
-import { registerUser } from '../../lib/api'
+import { useHistory } from 'react-router'
+import { registerUser, loginUser } from '../../lib/api'
+import { setToken } from '../../lib/auth'
 
 function Register() {
 
-  // const history = useHistory()
+  const history = useHistory()
   const { formdata, formErrors, setFormErrors, handleChange } = useForm({
     username: '',
     email: '',
@@ -18,7 +19,9 @@ function Register() {
     e.preventDefault()
     try {
       await registerUser(formdata)
-      // history.push('/login')
+      const res = await loginUser(formdata)
+      setToken(res.data.token)
+      history.push('/feed')
     } catch (error) {
       setFormErrors(error.response.data.errors)
     }
