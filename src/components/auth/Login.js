@@ -18,7 +18,7 @@ function Login() {
     try {
       const res = await loginUser(formdata)
       setToken(res.data.token)
-      history.push('/profile')
+      history.push('/feed')
     } catch (err) {
       setIsError(true)
     }
