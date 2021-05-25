@@ -77,7 +77,7 @@ export function getSingleUser(profileId) {
   return axios.get(`${baseUrl}/profile/${profileId}`)
 }
 
-export function getSingleUser(profileId, formdata) {
+export function editUser(profileId, formdata) {
   return axios.put(`${baseUrl}/profile/${profileId}`, formdata, headers())
 }
 
