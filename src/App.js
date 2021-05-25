@@ -15,12 +15,8 @@ function App() {
       <Nav />
       <Switch>
         <Route exact path="/" component={Home}/>
-<<<<<<< HEAD
-        <Route path="/profile" component={UserFeed}/>
-=======
         <Route path ="/feed" component={Feed}/>
-        <Route path="/profile" component={UserProfile}/>
->>>>>>> development
+        <Route path="/profile" component={UserFeed}/>
         <SecureRoute path="/posts/new" component={PostNew}/>
         <Route path="/posts/all" component={PostIndex}/>
         <Route path="/profile/:userId" component={UserProfile} />
