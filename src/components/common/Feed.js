@@ -1,7 +1,9 @@
+import PostIndex from '../posts/PostIndex'
+
 function Feed(){
 
   return (
-    <p>this is the feed page</p>
+    <PostIndex />
   )
 }
 
