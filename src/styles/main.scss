@@ -42,5 +42,28 @@ $footer-padding: 2rem 1.5rem;
 $card-header-background-color: $blue;
 $box-padding: 1rem;
 
+
+.control {
+  margin-top: 10px;
+  
+}
+.columns {
+  p {
+    text-align: center;
+  }
+  img {
+    text-align: center;
+  }
+  .block {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.input-is-medium {
+  padding: 20px;
+  margin: 10px;
+}
+
 @import '~bulma/bulma.sass';
 
