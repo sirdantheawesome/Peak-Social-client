@@ -50,7 +50,7 @@ function PostIndex() {
           </div>
           <footer className="card-footer">
             {
-              isAuthor ?
+              isAuthor(post.user) ?
                 <>
                   <a href="#" className="card-footer-item">Share</a>
                   <a href="#" className="card-footer-item">Comment</a>

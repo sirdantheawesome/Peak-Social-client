@@ -1,6 +1,6 @@
 import PostIndex from '../posts/PostIndex'
 
-function Feed(){
+function Feed() {
 
   return (
     <PostIndex />
