@@ -1,5 +1,6 @@
 import Register from './Register'
 import Login from './Login'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
@@ -22,7 +23,10 @@ function Home() {
       </div>
       <div className="columns is-mobile is-centered">
         <div className="column is-half is-centered ">
-          <button type="submit" className="button is-fullwidth is-info">Press to Peek</button>
+          <Link to={'/feed'}>
+            <button type="submit" className="button is-fullwidth is-info">Press to Peek</button>
+          </Link>
+
         </div>
       </div>
     </section>
