@@ -24,7 +24,7 @@ function Home() {
       <div className="columns is-mobile is-centered">
         <div className="column is-half is-centered ">
           <Link to={'/feed'}>
-            <button type="submit" className="button is-fullwidth is-info">Press to Peek</button>
+            <button type="submit" className="button is-fullwidth is-info is-large">Press to Peek</button>
           </Link>
 
         </div>
