@@ -1,19 +1,23 @@
 import React from 'react'
-import axios from 'axios'
-
+import { useParams } from 'react-router-dom'
 import UserCard from './UserCard'
+
+import { likePost } from '../../lib/api'
 
 function UserFeed() {
 
-
+  const { postId } = useParams()
   const [post, setPost] = React.useState(null) 
+
   React.useEffect(() => {
     const getData = async () => {
-      const response = await axios.get('')
+      const response = await likePost(postId)
       setPost(response.data)
     }
     getData()
-  },[])
+  },[postId])
+
+
 
   
 
@@ -38,7 +42,7 @@ function UserFeed() {
             <p>Following</p>
           </div>
         </div>
-      </section>
+      </section>      
     </>
   )
 }

@@ -1,23 +1,30 @@
 
+const isUser = true
 
-function UserCard() {
+function UserCard({ username, image, summary, peekcoin }) {
 
   return (
 
     <div className="user-card">
       <div className="card-image">
         <figure className="image is-128x128">
-          <img className="is-rounded"src="https://i.pinimg.com/originals/c2/25/6b/c2256bd05b6cf1e26c5796845daa4bf4.png" alt="Placeholder image"/>
+          <img className="is-rounded"src={image} alt={username}/>
         </figure>
         <br/>
       </div>
       <div className="content">
-        <p>Name</p>
+        <p>{username}</p> <p>PeekCoins : {peekcoin}</p>
         <br/>
-      This is my summary
+        <p>{summary}</p>
       </div>
-      <button className="button is-outlined">Edit Profile</button>
+      {isUser ? 
+        <button className="button is-outlined">Edit Profile</button>  
+        :
+        <button className="button is-outlined">Follow</button>
+      }
+      
     </div> 
+  
   )
 }
 
