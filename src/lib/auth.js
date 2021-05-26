@@ -30,3 +30,9 @@ export function isAuthor(userId) {
   if (!isAuthenticated()) return false
   return payload.sub === userId
 }
+
+export function getCurrentUserId() {
+  const payload = getPayload()
+  if (!isAuthenticated()) return null
+  return payload.sub
+}
