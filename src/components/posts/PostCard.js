@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getSingleUser } from '../../lib/api'
-import { getCurrentUserId, isAuthenticated, isAuthor } from '../../lib/auth'
+import { isAuthenticated, isAuthor } from '../../lib/auth'
+import CommentCard from './CommentCard'
 
 function PostCard({ title, text, image, userId, comments, likedByArray }) {
   const [author, setAuthor] = useState(null)
@@ -40,17 +41,19 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
     <div className='column is-full'>
       <div className="card m-5">
         <div className="card-header">
-          <div className="card-header-title">
+          <div className="card-header-title is-size-3 ml-5">
             {title}
           </div>
           <div className='image card-header-icon'>
             <Link
               to={`/profile/${userId}`}
             >
-              <div className='has-text-black mr-4 is-size-5 is-hidden-touch'>
-                {author && author.username}
+              <div className='box columns p-1 m-1 has-text-centered'>
+                <div className='column has-text-black mr-4 is-size-4 is-hidden-touch'>
+                  {author && author.username}
+                </div>
+                <img className='column image is-64x64 is-rounded ' src={author ? author.image : ''} />
               </div>
-              <img className='image is-48x48 is-rounded ' src={author ? author.image : ''} />
             </Link>
           </div>
         </div>
@@ -62,7 +65,6 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
             </figure>
           </div>
         }
-
         <div className="card-content">
           <div className="content">
             {text}
@@ -90,7 +92,11 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
                 <a onClick={sharePost} className="card-footer-item">Share</a>
               </>
           }
+
         </footer>
+        <div className='container is-fullwidth'>
+          <CommentCard text={'weird post bro'} />
+        </div>
       </div>
     </div>
   )
