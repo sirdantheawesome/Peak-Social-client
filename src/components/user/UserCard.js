@@ -1,10 +1,24 @@
 
-const isUser = true
+import { useParams } from 'react-router-dom'
+import { isAuthenticated } from '../../lib/auth'
+import UserProfile from '../user/UserProfile'
+
+
+/// get user 
 
 function UserCard({ username, image, summary, peekcoin }) {
+  const isLoggedIn = isAuthenticated()
+  const { userId } = useParams()
+  const following = []
 
+  const handleEdit = () => {
+    console.log('click')
+  }
+  const handleFollow = () => {
+    console.log(userId)
+  }
+  
   return (
-
     <div className="user-card">
       <div className="card-image">
         <figure className="image is-128x128">
@@ -17,10 +31,10 @@ function UserCard({ username, image, summary, peekcoin }) {
         <br/>
         <p>{summary}</p>
       </div>
-      {isUser ? 
-        <button className="button is-outlined">Edit Profile</button>  
+      {isLoggedIn ? 
+        <button className="button is-outlined" onClick={handleEdit}>Edit Profile</button>  
         :
-        <button className="button is-outlined">Follow</button>
+        <button className="button is-outlined" onClick={handleFollow}>Follow</button>
       }
       
     </div> 

@@ -1,31 +1,34 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import UserCard from './UserCard'
-
-import { likePost } from '../../lib/api'
+import { getAllPosts } from '../../lib/api'
+import Error from '../../components/common/Error'
+import PostCard from '../posts/PostCard'
 
 function UserFeed() {
 
-  const { postId } = useParams()
-  const [post, setPost] = React.useState(null) 
+  const [posts, setPosts] = React.useState(null)
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !posts && !isError 
 
   React.useEffect(() => {
     const getData = async () => {
-      const response = await likePost(postId)
-      setPost(response.data)
+      try {
+        const response = await getAllPosts()
+        setPosts(response.data)
+      } catch (err) {
+        setIsError(true)
+      }
     }
     getData()
-  },[postId])
-
-
-
-  
+  },[])
 
   return (
     <>
       <section className="hero is-link is-fullheight-with-navbar">
         <div className="columns">
           <div className="column">
+            {isError && <Error/>}
+            {isLoading && <p>loading... </p>}
             <UserCard />
           </div>
           <div className="column is-half">
@@ -33,9 +36,9 @@ function UserFeed() {
               <input className="input is-medium" type="text" placeholder="Whats on your mind??"/>
             </div>
             <div className="block">
-              <img src ="https://cdn.mos.cms.futurecdn.net/c7GYXE3TEQvvFGDZDvXDTT.jpg" alt="/"/>
-              <img src ="https://cdn.mos.cms.futurecdn.net/c7GYXE3TEQvvFGDZDvXDTT.jpg" alt="/"/>
-              <img src ="https://cdn.mos.cms.futurecdn.net/c7GYXE3TEQvvFGDZDvXDTT.jpg" alt="/"/>
+              {posts && ( 
+                posts.map(post => <PostCard  key= {post.id} {... post }/>)
+              )}
             </div>
           </div>
           <div className="column">
