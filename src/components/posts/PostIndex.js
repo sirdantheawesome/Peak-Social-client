@@ -12,7 +12,7 @@ function PostIndex(popup) {
     const getData = async () => {
       try {
         const res = await getAllPosts()
-        setPosts(res.data)
+        setPosts(res.data.reverse())
       } catch (error) {
         setIsError(true)
       }

@@ -3,6 +3,7 @@ import UserCard from './UserCard'
 import { getAllPosts } from '../../lib/api'
 import Error from '../../components/common/Error'
 import PostCard from '../posts/PostCard'
+import PostIndex from '../posts/PostIndex'
 
 function UserFeed() {
 
@@ -32,14 +33,15 @@ function UserFeed() {
             <UserCard />
           </div>
           <div className="column is-half">
-            <div className="block">
+            <PostIndex />
+            {/* <div className="block">
               <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
             </div>
             <div className="block">
               {posts && (
                 posts.map(post => <PostCard key={post.id} {...post} />)
               )}
-            </div>
+            </div> */}
           </div>
           <div className="column">
             <p>Following</p>

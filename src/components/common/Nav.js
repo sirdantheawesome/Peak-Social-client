@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { getCurrentUserId } from '../../lib/auth'
 
 function Nav() {
   return (
@@ -17,7 +18,7 @@ function Nav() {
         <div className="navbar-end">
           <div className="container">
             <div className="navbar-item">
-              <Link to='/profile/:userId' className="button">
+              <Link to={`/profile/${getCurrentUserId()}`} className="button">
                 Profile
               </Link>
             </div>

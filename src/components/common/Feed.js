@@ -12,7 +12,7 @@ function Feed() {
     setPopup('modal is-active')
   }
 
-  const handleClose = () =>{
+  const handleClose = () => {
     setPopup('modal')
   }
   return (

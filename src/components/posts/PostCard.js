@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getSingleUser } from '../../lib/api'
-import { isAuthenticated, isAuthor } from '../../lib/auth'
+import { isAuthor } from '../../lib/auth'
 import CommentCard from './CommentCard'
 
 function PostCard({ title, text, image, userId, comments, likedByArray }) {
@@ -75,9 +75,9 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
             isAuthor(userId) ?
               <>
                 <a onClick={likePost} className="card-footer-item">Share</a>
-                <a href="#" className="card-footer-item">Comment</a>
-                <a href="#" className="card-footer-item">Edit</a>
-                <a href="#" className="card-footer-item is-danger">Delete</a>
+                <a className="card-footer-item">Comment</a>
+                <a className="card-footer-item">Edit</a>
+                <a className="card-footer-item is-danger">Delete</a>
               </>
               :
               <>
