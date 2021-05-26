@@ -1,3 +1,5 @@
+import { isAuthor } from "../../lib/auth"
+
 function PostCard({ title, text, image, userId, comments }) {
 
 
@@ -45,7 +47,7 @@ function PostCard({ title, text, image, userId, comments }) {
       </div>
       <footer className="card-footer">
         {
-          isCreatorUser ?
+          isAuthor(userId) ?
             <>
               <a onClick={likePost} className="card-footer-item">Share</a>
               <a href="#" className="card-footer-item">Comment</a>

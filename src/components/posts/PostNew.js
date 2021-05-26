@@ -2,8 +2,10 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { createPost } from '../../lib/api'
 
-function PostNew() {
+
+function PostNew({ setPopup }) {
   const history = useHistory()
+  // const [popup, setPopup] = React.useState('modal is-active')
   const [formdata, setFormData] = React.useState({
     title: '',
     text: '',
@@ -14,6 +16,8 @@ function PostNew() {
     setFormData({ ...formdata, [e.target.name]: e.target.value })
   }
 
+  console.log(setPopup)
+
   const handleSubmit = async event => {
     event.preventDefault()
 
@@ -21,6 +25,7 @@ function PostNew() {
       await createPost(formdata)
 
       history.push('/feed')
+      setPopup('modal')
     } catch (err) {
       console.log(err)
     }

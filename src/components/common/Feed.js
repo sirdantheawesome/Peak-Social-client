@@ -1,11 +1,20 @@
+import React from 'react'
 import PostIndex from '../posts/PostIndex'
 import UserCard from '../user/UserCard'
 import { isAuthenticated } from '../../lib/auth'
-import Popup from 'reactjs-popup'
 import PostNew from '../posts/PostNew'
 
 function Feed() {
 
+  const [popup, setPopup] = React.useState('modal')
+
+  const handleClick = () => {
+    setPopup('modal is-active')
+  }
+
+  const handleClose = () =>{
+    setPopup('modal')
+  }
   return (
     <>
 
@@ -17,16 +26,26 @@ function Feed() {
           <div className="block">
             <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
             {isAuthenticated() && (
-              <Popup trigger={<button className="button">create new post</button>} position="bottom center">
-                <div >
-                  <PostNew/>
+              <>
+                <button onClick={handleClick} className="button"> create a new post</button>
+                <div className={popup}>
+                  <div className="modal-background"></div>
+                  <div className="modal-card">
+                    <header className="modal-card-head">
+                      <p className="modal-card-title">Create a new post!</p>
+                      <button onClick={handleClose} className="delete" aria-label="close"></button>
+                    </header>
+                    <section className="modal-card-body">
+                      <PostNew setPopup={setPopup} />
+                    </section>
+                  </div>
                 </div>
-              </Popup>
+              </>
             )}
 
           </div>
           <div className="block">
-            <PostIndex />
+            <PostIndex popup={popup} />
           </div>
         </div>
         <div className="column">
