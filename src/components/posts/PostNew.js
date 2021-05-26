@@ -10,8 +10,8 @@ function PostNew() {
     image: '',
   })
 
-  const handleChange = (e)=>{
-    setFormData({...formdata, [e.target.name]: e.target.value})
+  const handleChange = (e) => {
+    setFormData({ ...formdata, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async event => {
@@ -27,31 +27,31 @@ function PostNew() {
   }
 
   return (
-    // <section className="section">
-    //   <div className="container">
-        <div className="columns">
+    <section className="box">
+      <div className="popup-content">
+        <div className="column is-centered">
           <form
-            className="column is-half is-offset-one-quarter "
+            className="column is-full"
             onSubmit={handleSubmit}
           >
             <div className="field">
-              <label className="label" htmlFor="name" >Name</label>
+              <label className="label" htmlFor="title" >Title</label>
               <div className="control">
                 <input
                   className="input"
-                  placeholder="Name"
-                  name="name"
+                  placeholder="Title"
+                  name="title"
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div className="field">
-              <label className="label" htmlFor="polarPattern" >Polar Pattern</label>
+              <label className="label" htmlFor="text" >Text</label>
               <div className="control">
                 <input
                   className="input"
-                  placeholder="Polar Pattern"
-                  name="polarPattern"
+                  placeholder="text"
+                  name="text"
                   onChange={handleChange}
                 />
               </div>
@@ -74,8 +74,8 @@ function PostNew() {
             </div>
           </form>
         </div>
-    //   </div>
-    // </section>
+      </div>
+    </section>
   )
 }
 

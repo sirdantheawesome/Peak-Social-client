@@ -28,5 +28,5 @@ export function isAuthenticated() {
 export function isAuthor(userId) {
   const payload = getPayload()
   if (!isAuthenticated()) return false
-  return payload.sub === userId
+  return payload.userId === userId
 }
