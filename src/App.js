@@ -3,7 +3,6 @@ import Home from './components/auth/Home'
 import Feed from './components/common/Feed'
 import UserFeed from './components/user/UserFeed'
 import Nav from './components/common/Nav'
-import PostCard from './components/posts/PostCard'
 
 function App() {
   return (

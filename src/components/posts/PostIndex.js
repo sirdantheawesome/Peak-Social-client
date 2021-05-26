@@ -1,10 +1,9 @@
 import React from 'react'
 import { getAllPosts } from '../../lib/api'
-import { isAuthor } from '../../lib/auth'
 import Error from '../common/Error'
 import PostCard from './PostCard'
 
-function PostIndex() {
+function PostIndex(popup) {
   const [posts, setPosts] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !posts && !isError
@@ -19,7 +18,7 @@ function PostIndex() {
       }
     }
     getData()
-  }, [])
+  }, [popup, posts])
 
   return (
     <section className='section'>

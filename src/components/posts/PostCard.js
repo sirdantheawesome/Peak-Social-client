@@ -7,9 +7,6 @@ import CommentCard from './CommentCard'
 function PostCard({ title, text, image, userId, comments, likedByArray }) {
   const [author, setAuthor] = useState(null)
 
-  //! Temporary testing variables, swap for auth and passed in user array
-  const isCreatorUser = isAuthor(userId)
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -75,7 +72,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
         </div>
         <footer className="card-footer">
           {
-            isCreatorUser ?
+            isAuthor(userId) ?
               <>
                 <a onClick={likePost} className="card-footer-item">Share</a>
                 <a href="#" className="card-footer-item">Comment</a>
@@ -89,7 +86,6 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
                 <a onClick={sharePost} className="card-footer-item">Share</a>
               </>
           }
-
         </footer>
         <div className='comment-border'>
           {comments.length ? <a className='is-centered p-3'>Comments: [{comments.length}]</a> : ''}
