@@ -51,9 +51,6 @@ $box-padding: 1rem;
   p {
     text-align: center;
   }
-  img {
-    text-align: center;
-  }
   .block {
     text-align: center;
     margin-top: 10px;
@@ -64,6 +61,12 @@ $box-padding: 1rem;
   padding: 20px;
   margin: 10px;
 }
+
+.user-card {
+  text-align: center;
+}
+
+
 
 @import '~bulma/bulma.sass';
 
