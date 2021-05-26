@@ -1,6 +1,31 @@
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getSingleUser } from '../../lib/api'
+
 function CommentCard({ text, userId, likedByArray }) {
+  const [author, setAuthor] = useState(null)
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await getSingleUser(userId)
+        setAuthor(res.data)
+      } catch (e) {
+        console.warn('Failed to fetch Author')
+      }
+    }
+    getData()
+  }, [userId])
+
+
   return (
-    <div className='comment-border p-0 m-0'>
+    <div className='hover-border p-0 m-1'>
+      <Link to={`/profile/${userId}`}>
+        <div className='image'>
+          <img className='is-rounded image is-32x32 mt-2 ml-2' src={author ? author.image : ''} />
+        </div>
+        <div className='has-text ml-2'>{author && author.username}</div>
+      </Link>
       <div className="card-content pt-5 pb-0">
         <div className='columns'>
           <div className="content column is-four-fifths m-0">

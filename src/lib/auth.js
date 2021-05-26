@@ -28,7 +28,6 @@ export function isAuthenticated() {
 export function isAuthor(userId) {
   const payload = getPayload()
   if (!isAuthenticated()) return false
-  console.log(payload.userId, userId)
   return payload.userId === userId
 }
 

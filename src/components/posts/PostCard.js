@@ -9,8 +9,6 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
 
   //! Temporary testing variables, swap for auth and passed in user array
   const isCreatorUser = isAuthor(userId)
-  console.log('Auth? ', isAuthenticated(), 'isAuthor?', isAuthor(userId))
-
 
   useEffect(() => {
     const getData = async () => {
@@ -23,7 +21,6 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
     }
     getData()
   }, [userId])
-  console.log(author)
 
   const likePost = async () => {
     console.log('Liked post of title: ', title)
@@ -94,8 +91,21 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
           }
 
         </footer>
-        <div className='container is-fullwidth'>
-          <CommentCard text={'weird post bro'} />
+        <div className='comment-border'>
+          {comments.length ? <a className='is-centered p-3'>Comments: [{comments.length}]</a> : ''}
+          {comments ?
+            comments.map((comment, i) => {
+              if (i > 1) {
+                console.log(i)
+                return
+              } else {
+                return (
+                  <CommentCard key={comment._id} text={comment.text} userId={comment.user} />
+                )
+              }
+            })
+            : ''
+          }
         </div>
       </div>
     </div>
