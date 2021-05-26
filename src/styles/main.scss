@@ -1,6 +1,6 @@
 .card {
   height: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 .card-content {
@@ -23,8 +23,7 @@ section.section {
   min-height: calc(100vh - 11.25rem);
 }
 
-
-.thing{
+.thing {
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -41,10 +40,8 @@ $footer-padding: 2rem 1.5rem;
 $card-header-background-color: $blue;
 $box-padding: 1rem;
 
-
 .control {
   margin-top: 10px;
-  
 }
 .columns {
   p {
@@ -65,7 +62,8 @@ $box-padding: 1rem;
   text-align: center;
 }
 
+.comment-border {
+  border: 1px solid hsl(0, 0%, 93%);
+}
 
-
-@import '~bulma/bulma.sass';
-
+@import "~bulma/bulma.sass";

@@ -28,11 +28,13 @@ export function isAuthenticated() {
 export function isAuthor(userId) {
   const payload = getPayload()
   if (!isAuthenticated()) return false
+  console.log(payload.userId, userId)
   return payload.userId === userId
 }
 
 export function getCurrentUserId() {
   const payload = getPayload()
   if (!isAuthenticated()) return null
-  return payload.sub
+  console.log(payload.userId)
+  return payload.userId
 }
