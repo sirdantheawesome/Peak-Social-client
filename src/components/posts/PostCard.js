@@ -98,6 +98,24 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
           <CommentCard text={'weird post bro'} />
         </div>
       </div>
+      <footer className="card-footer">
+        {
+          isAuthor(userId) ?
+            <>
+              <a onClick={likePost} className="card-footer-item">Share</a>
+              <a href="#" className="card-footer-item">Comment</a>
+              <a href="#" className="card-footer-item">Edit</a>
+              <a href="#" className="card-footer-item is-danger">Delete</a>
+            </>
+            :
+            <>
+              <a onClick={likePost} className="card-footer-item">Like</a>
+              <a onClick={commentPost} className="card-footer-item">Comment</a>
+              <a onClick={sharePost} className="card-footer-item">Share</a>
+            </>
+        }
+      </footer>
+
     </div>
   )
 }
