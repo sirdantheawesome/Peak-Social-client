@@ -76,7 +76,7 @@ function PostIndex() {
         <div className='columns is-multiline'>
           {isError && <Error />}
           {isLoading && <p className="subtitle has-text-centered is-fullwidth">...Loading</p>}
-          {posts&& displayPosts()}
+          {posts && displayPosts()}
         </div>
       </div>
     </section>
