@@ -1,17 +1,28 @@
 import React from 'react'
-function UserProfile() {
+import { useParams} from '../../lib/auth'
+import { getSingleUser } from '../../lib/api'
 
-  const user = {
-    username: 'craig',
-    image: 'https://static.bhphotovideo.com/explora/sites/default/files/ts-space-sun-and-solar-viewing-facts-versus-fiction.jpg',
-    summary: 'blah blah blah',
-    peekcoin: 200,
-  }
+
+function UserProfile() {
+  const { userId } = useParams()
+  const [user, setUser] = React.useState(null)
+ 
+  React.useEffect(() => {
+    try{
+      const res = await getSingleUser(userId)
+      setUser(res.data)
+    }catch(err) {
+      setIsError(true)
+    }
+    getData()
+  },[userId])
+
+  console.log(user)
 
   return (
     <>
       <div>
-        {user}
+       hello
       </div>
     </>   
   )
