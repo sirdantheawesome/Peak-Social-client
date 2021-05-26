@@ -1,7 +1,6 @@
 
 import { useParams } from 'react-router-dom'
 import { isAuthenticated } from '../../lib/auth'
-import UserProfile from '../user/UserProfile'
 
 
 /// get user 
