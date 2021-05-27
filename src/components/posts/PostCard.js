@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { getSingleUser } from '../../lib/api'
-import { isAuthor } from '../../lib/auth'
-import CommentCard from './CommentCard'
+import PostSection from './PostSection'
+import CommentSection from './CommentSection'
 
 function PostCard({ title, text, image, userId, comments, likedByArray }) {
   const [author, setAuthor] = useState(null)
+  const [popup, setPopup] = useState('modal')
+
+  const handlePostOpen = () => {
+    setPopup('modal is-active')
+  }
+
+  const handlePostClose = () => {
+    setPopup('modal')
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -30,78 +38,44 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
   const sharePost = async () => {
     console.log('Shared post of title: ', title)
   }
-
+  console.log(popup)
   return (
-    <div className='column is-full'>
+    <div onClick={handlePostOpen} className='column is-full'>
       <div className="card m-5">
-        <div className="card-header">
-          <div className="card-header-title is-size-3 ml-5">
-            {title}
+        <PostSection
+          title={title}
+          text={text}
+          image={image}
+          userId={userId}
+          likedByArray={likedByArray}
+          author={author}
+          likePost={likePost}
+          commentPost={commentPost}
+          sharePost={sharePost}
+        />
+        <CommentSection
+          comments={comments}
+          maxComments={2}
+        />
+        <div className={popup}>
+          <div onClick={handlePostClose} className="modal-background"></div>
+          <div className="modal-content">
+            <PostSection
+              title={title}
+              text={text}
+              image={image}
+              userId={userId}
+              likedByArray={likedByArray}
+              author={author}
+              likePost={likePost}
+              commentPost={commentPost}
+              sharePost={sharePost}
+            />
+            <CommentSection
+              comments={comments}
+            />
           </div>
-          <div className='image card-header-icon'>
-            <Link
-              to={`/profile/${userId}`}
-            >
-              <div className='box columns p-1 m-1 has-text-centered'>
-                <div className='column has-text-black mr-4 is-size-4 is-hidden-touch'>
-                  {author && author.username}
-                </div>
-                <img className='column image is-64x64 is-rounded ' src={author ? author.image : ''} />
-              </div>
-            </Link>
-          </div>
-        </div>
-        {
-          image &&
-          <div className="card-image">
-            <figure className="image">
-              <img className='image' src={image} />
-            </figure>
-          </div>
-        }
-        <div className="card-content">
-          <div className="content">
-            {text}
-          </div>
-          <h3>
-            {likedByArray && 'Liked By:'}
-          </h3>
-          <h4>
-            {likedByArray && likedByArray.map(like => <a key={like}>{like}, </a>)}
-          </h4>
-        </div>
-        <footer className="card-footer">
-          {
-            isAuthor(userId) ?
-              <>
-                <a onClick={likePost} className="card-footer-item">Share</a>
-                <a className="card-footer-item">Comment</a>
-                <a className="card-footer-item">Edit</a>
-                <a className="card-footer-item is-danger">Delete</a>
-              </>
-              :
-              <>
-                <a onClick={likePost} className="card-footer-item">Like</a>
-                <a onClick={commentPost} className="card-footer-item">Comment</a>
-                <a onClick={sharePost} className="card-footer-item">Share</a>
-              </>
-          }
-        </footer>
-        <div className='comment-border'>
-          {comments.length ? <a className='is-centered p-3'>Comments: [{comments.length}]</a> : ''}
-          {comments ?
-            comments.map((comment, i) => {
-              if (i > 1) {
-                console.log(i)
-                return
-              } else {
-                return (
-                  <CommentCard key={comment._id} text={comment.text} userId={comment.user} />
-                )
-              }
-            })
-            : ''
-          }
+          <button onClick={handlePostClose} className="modal-close is-large" aria-label="close"></button>
         </div>
       </div>
     </div>
