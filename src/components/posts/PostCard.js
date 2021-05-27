@@ -50,7 +50,6 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
   const deletePost = async () => {
     console.log('Deleted post of title: ', title)
   }
-  console.log(popup)
   return (
     <div className='column is-full'>
       <div onClick={handlePostOpen} className="card m-5">

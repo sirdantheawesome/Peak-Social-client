@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { isAuthor } from '../../lib/auth'
 
 function PostSection({ title, userId, author, image, text, likedByArray, likePost, commentPost, sharePost, editPost, deletePost }) {
-  console.log(likedByArray)
   return (
     <>
       <div className="card-header columns p-0 m-0">
@@ -36,9 +35,10 @@ function PostSection({ title, userId, author, image, text, likedByArray, likePos
         </div>
         <h3>
           {likedByArray && 'Liked By:'}
+          {console.log(likedByArray)}
         </h3>
         <h4>
-          {likedByArray && likedByArray.map(like => <a key={like}>{like}, </a>)}
+          {likedByArray && likedByArray.map(like => <Link to={`/profile/${like}`} key={like}>{like}, </Link>)}
         </h4>
       </div>
       <footer className="card-footer">
