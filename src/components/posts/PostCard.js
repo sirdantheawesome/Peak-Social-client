@@ -57,13 +57,15 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
           commentPost={commentPost}
           sharePost={sharePost}
         />
-        <CommentSection
-          comments={comments}
-          maxComments={2}
-        />
+        {comments &&
+          <CommentSection
+            comments={comments}
+            maxComments={2}
+          />
+        }
         <div className={popup}>
           <div onClick={handlePostClose} className="modal-background"></div>
-          <div className="modal-content">
+          <div className="modal-content has-background-white">
             <PostSection
               title={title}
               text={text}

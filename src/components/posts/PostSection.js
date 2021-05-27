@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { isAuthor } from '../../lib/auth'
 
 function PostSection({ title, userId, author, image, text, likedByArray, likePost, commentPost, sharePost }) {
+  console.log(likedByArray)
   return (
     <>
       <div className="card-header">

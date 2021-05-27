@@ -18,11 +18,11 @@ function Feed() {
   return (
     <>
 
-      <div className="columns">
+      <div className="columns is-desktop">
         <div className="column">
           <UserCard />
         </div>
-        <div className="column is-half">
+        <div className="column is-full-mobile is-full-tablet is-two-thirds-desktop is-half-widescreen is-one-third-fullhd">
           <div className="block">
             <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
             {isAuthenticated() && (
