@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { getSingleUser } from '../../lib/api'
 import PostSection from './PostSection'
 import CommentSection from './CommentSection'
+import { likePost as apiLikePost } from '../../lib/api'
 
-function PostCard({ title, text, image, userId, comments, likedByArray }) {
+function PostCard({ title, text, image, userId, comments, likedByArray, postId }) {
   const [author, setAuthor] = useState(null)
   const [popup, setPopup] = useState('modal')
 
@@ -31,24 +32,34 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
     getData()
   }, [userId])
 
-  const likePost = async () => {
+  const likePost = async (event) => {
+    try {
+      await apiLikePost(postId)
+    } catch (e) {
+      console.warn(e)
+    }
     console.log('Liked post of title: ', title)
+    event.stopPropagation()
   }
 
-  const commentPost = async () => {
+  const commentPost = async (event) => {
     console.log('Commented post of title: ', title)
+    event.stopPropagation()
   }
 
-  const sharePost = async () => {
+  const sharePost = async (event) => {
     console.log('Shared post of title: ', title)
+    event.stopPropagation()
   }
 
-  const editPost = async () => {
+  const editPost = async (event) => {
     console.log('Edtied post of title: ', title)
+    event.stopPropagation()
   }
 
-  const deletePost = async () => {
+  const deletePost = async (event) => {
     console.log('Deleted post of title: ', title)
+    event.stopPropagation()
   }
   return (
     <div className='column is-full'>
