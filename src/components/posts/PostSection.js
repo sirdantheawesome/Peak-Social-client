@@ -1,7 +1,25 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getSingleUser } from '../../lib/api'
 import { isAuthor } from '../../lib/auth'
 
 function PostSection({ title, userId, author, image, text, likedByArray, likePost, commentPost, sharePost, editPost, deletePost }) {
+  const [likedNames, setLikedNames] = useState([])
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        await setLikedNames(await Promise.all(likedByArray.map(async (user) => {
+          const res = await getSingleUser(user)
+          return res.data.username
+        })))
+      } catch (e) {
+        console.warn('Failed to fetch Author')
+      }
+    }
+    getData()
+  }, [likedByArray])
+
+  console.log('liked names: ', likedNames)
   return (
     <>
       <div className="card-header columns p-0 m-0">
@@ -34,11 +52,20 @@ function PostSection({ title, userId, author, image, text, likedByArray, likePos
           {text}
         </div>
         <h3>
-          {likedByArray && 'Liked By:'}
+          {likedByArray.length > 0 ? 'Liked By:' : ''}
           {console.log(likedByArray)}
         </h3>
         <h4>
-          {likedByArray && likedByArray.map(like => <Link to={`/profile/${like}`} key={like}>{like}, </Link>)}
+          {
+            likedByArray &&
+            likedNames.map((like, i) => (
+              <Link
+                to={`/profile/${likedByArray[i]}`}
+                key={like}
+              >
+                {like}, </Link>
+            ))
+          }
         </h4>
       </div>
       <footer className="card-footer">
