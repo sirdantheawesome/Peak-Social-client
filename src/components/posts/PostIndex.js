@@ -19,7 +19,7 @@ function PostIndex(popup) {
     }
     getData()
   }, [popup])
-
+  console.log('index')
   return (
     <section className='section'>
       <div className='container'>
