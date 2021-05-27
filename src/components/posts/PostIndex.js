@@ -18,7 +18,7 @@ function PostIndex(popup) {
       }
     }
     getData()
-  }, [popup, posts])
+  }, [popup])
 
   return (
     <section className='section'>
