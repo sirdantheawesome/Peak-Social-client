@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { isAuthor } from '../../lib/auth'
 
-function PostSection({ title, userId, author, image, text, likedByArray, likePost, commentPost, sharePost }) {
+function PostSection({ title, userId, author, image, text, likedByArray, likePost, commentPost, sharePost, editPost, deletePost }) {
   console.log(likedByArray)
   return (
     <>
-      <div className="card-header">
-        <div className="card-header-title is-size-3 ml-5">
+      <div className="card-header columns p-0 m-0">
+        <div className="column card-header-title is-size-4 ml-5 mt-4">
           {title}
         </div>
         <div className='image card-header-icon'>
@@ -14,10 +14,10 @@ function PostSection({ title, userId, author, image, text, likedByArray, likePos
             to={`/profile/${userId}`}
           >
             <div className='box columns p-1 m-1 has-text-centered'>
-              <div className='column has-text-black mr-4 is-size-4 is-hidden-touch'>
+              <div className='column is-half has-text-black mr-0 is-size-4 is-hidden-touch'>
                 {author && author.username}
               </div>
-              <img className='column image is-64x64 is-rounded ' src={author ? author.image : ''} />
+              <img className='column image is-64x64  is-rounded ' src={author ? author.image : ''} />
             </div>
           </Link>
         </div>
@@ -46,9 +46,9 @@ function PostSection({ title, userId, author, image, text, likedByArray, likePos
           isAuthor(userId) ?
             <>
               <a onClick={likePost} className="card-footer-item">Share</a>
-              <a className="card-footer-item">Comment</a>
-              <a className="card-footer-item">Edit</a>
-              <a className="card-footer-item is-danger">Delete</a>
+              <a onClick={commentPost} className="card-footer-item">Comment</a>
+              <a onClick={editPost} className="card-footer-item">Edit</a>
+              <a onClick={deletePost} className="card-footer-item has-text-danger is-danger">Delete</a>
             </>
             :
             <>

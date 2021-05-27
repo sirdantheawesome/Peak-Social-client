@@ -42,6 +42,14 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
   const sharePost = async () => {
     console.log('Shared post of title: ', title)
   }
+
+  const editPost = async () => {
+    console.log('Edtied post of title: ', title)
+  }
+
+  const deletePost = async () => {
+    console.log('Deleted post of title: ', title)
+  }
   console.log(popup)
   return (
     <div className='column is-full'>
@@ -56,6 +64,8 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
           likePost={likePost}
           commentPost={commentPost}
           sharePost={sharePost}
+          editPost={editPost}
+          deletePost={deletePost}
         />
         {comments &&
           <CommentSection
@@ -76,6 +86,8 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
               likePost={likePost}
               commentPost={commentPost}
               sharePost={sharePost}
+              editPost={editPost}
+              deletePost={deletePost}
             />
             <CommentSection
               comments={comments}
