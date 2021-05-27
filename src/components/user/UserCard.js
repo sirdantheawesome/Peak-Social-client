@@ -14,6 +14,8 @@ function UserCard() {
   const [user, setUser] = React.useState(null)
   const following = []
 
+  console.log({userId})
+
   const handleEdit = () => {
     console.log('click')
   }
