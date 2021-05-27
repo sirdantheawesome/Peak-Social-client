@@ -9,10 +9,12 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
 
   const handlePostOpen = () => {
     setPopup('modal is-active')
+    console.log('on')
   }
 
   const handlePostClose = () => {
     setPopup('modal')
+    console.log('off')
   }
 
   useEffect(() => {
@@ -40,8 +42,8 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
   }
   console.log(popup)
   return (
-    <div onClick={handlePostOpen} className='column is-full'>
-      <div className="card m-5">
+    <div className='column is-full'>
+      <div onClick={handlePostOpen} className="card m-5">
         <PostSection
           title={title}
           text={text}
@@ -58,7 +60,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
           maxComments={2}
         />
         <div className={popup}>
-          <div onClick={handlePostClose} className="modal-background"></div>
+          <div className="modal-background"></div>
           <div className="modal-content">
             <PostSection
               title={title}
