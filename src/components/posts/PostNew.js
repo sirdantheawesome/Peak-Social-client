@@ -6,18 +6,12 @@ import { useForm } from '../../hooks/useForm'
 
 function PostNew({ setPopup }) {
   const history = useHistory()
-  // const [popup, setPopup] = React.useState('modal is-active')
   const { formdata, formErrors, setFormErrors, handleChange } = useForm({
     title: '',
     text: '',
     image: '',
   })
 
-  // const handleChange = (e) => {
-  //   setFormData({ ...formdata, [e.target.name]: e.target.value })
-  // }
-
-  // console.log(setPopup)
 
   const handleSubmit = async event => {
     event.preventDefault()

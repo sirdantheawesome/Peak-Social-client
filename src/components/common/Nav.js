@@ -1,7 +1,24 @@
-import { Link } from 'react-router-dom'
-import { getCurrentUserId } from '../../lib/auth'
+import { Link, useHistory } from 'react-router-dom'
+import { getCurrentUserId, isAuthenticated, removeToken } from '../../lib/auth'
+import React from 'react'
 
-function Nav() {
+function Nav({setInput}) {
+
+  
+
+  const history = useHistory()
+  const isLoggedIn = isAuthenticated()
+
+  const handleLogout = () => {
+    removeToken()
+    history.push('/')
+  }
+
+  const handleInput = (e) => {
+    setInput(e.target.value)
+    
+  }
+
   return (
     <nav className="navbar is-light">
       <div className="container">
@@ -12,22 +29,33 @@ function Nav() {
         </div >
         <div className="container">
           <div className="navbar-item">
-            <input className="input" type="text" placeholder="Search" />
+            <input onKeyUp={handleInput} className="input" type="text" placeholder="Search" />
           </div>
         </div>
         <div className="navbar-end">
           <div className="container">
             <div className="navbar-item">
-              <Link to={`/profile/${getCurrentUserId()}`} className="button">
+              {isLoggedIn && <Link to={`/profile/${getCurrentUserId()}`} className="button">
                 Profile
-              </Link>
+              </Link>}
             </div>
           </div>
           <div className="container">
             <div className="navbar-item">
-              <Link to='/' className="button">
-                Login/Register
-              </Link>
+              {!isLoggedIn ?
+                <>
+                  <Link to="/" className="button is-warning">
+                    Log In / Register
+                  </Link>
+                </>
+                :
+                <button
+                  className="button is-warning"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              }
             </div>
           </div>
         </div>

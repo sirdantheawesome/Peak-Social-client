@@ -4,7 +4,7 @@ import UserCard from '../user/UserCard'
 import { isAuthenticated } from '../../lib/auth'
 import PostNew from '../posts/PostNew'
 
-function Feed() {
+function Feed({input}) {
 
   const [popup, setPopup] = React.useState('modal')
 
@@ -15,14 +15,16 @@ function Feed() {
   const handleClose = () => {
     setPopup('modal')
   }
+
+
   return (
     <>
 
-      <div className="columns">
+      <div className="columns is-desktop">
         <div className="column">
           <UserCard />
         </div>
-        <div className="column is-half">
+        <div className="column is-full-mobile is-full-tablet is-two-thirds-desktop is-half-widescreen is-one-third-fullhd">
           <div className="block">
             <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
             {isAuthenticated() && (
@@ -45,7 +47,7 @@ function Feed() {
 
           </div>
           <div className="block">
-            <PostIndex popup={popup} />
+            <PostIndex popup={popup} input={input} />
           </div>
         </div>
         <div className="column">

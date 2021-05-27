@@ -3,7 +3,7 @@ import { getAllPosts } from '../../lib/api'
 import Error from '../common/Error'
 import PostCard from './PostCard'
 
-function PostIndex(popup) {
+function PostIndex({popup, input}) {
   const [posts, setPosts] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !posts && !isError
@@ -18,7 +18,19 @@ function PostIndex(popup) {
       }
     }
     getData()
-  }, [popup])
+  }, [popup, input])
+
+
+  const filterPosts = () => {
+    return (
+      posts.filter((post)=>{
+        return (
+          post.title.toLowerCase().includes(input) || post.text.toLowerCase().includes(input)
+        )
+      })
+    )
+  }
+
   console.log('index')
   return (
     <section className='section'>
@@ -27,7 +39,7 @@ function PostIndex(popup) {
           {isError && <Error />}
           {isLoading && <p className="subtitle has-text-centered is-fullwidth">...Loading</p>}
           {posts &&
-            posts.map((post) => (
+            filterPosts().map((post) => (
               <PostCard
                 key={post._id}
                 title={post.title}
@@ -35,6 +47,8 @@ function PostIndex(popup) {
                 text={post.text}
                 userId={post.user}
                 comments={post.comments}
+                likedByArray={post.userlikes}
+                postId={post._id}
               />
             ))
           }

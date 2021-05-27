@@ -5,7 +5,7 @@ import Error from '../../components/common/Error'
 import PostCard from '../posts/PostCard'
 import PostIndex from '../posts/PostIndex'
 
-function UserFeed() {
+function UserFeed({ input }) {
 
   const [posts, setPosts] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
@@ -33,7 +33,7 @@ function UserFeed() {
             <UserCard />
           </div>
           <div className="column is-half">
-            <PostIndex />
+            <PostIndex input={input} />
             {/* <div className="block">
               <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
             </div>
