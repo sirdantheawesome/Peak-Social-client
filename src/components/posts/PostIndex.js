@@ -47,6 +47,8 @@ function PostIndex({popup, input}) {
                 text={post.text}
                 userId={post.user}
                 comments={post.comments}
+                likedByArray={post.userlikes}
+                postId={post._id}
               />
             ))
           }
