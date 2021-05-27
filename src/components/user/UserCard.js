@@ -5,24 +5,27 @@ import { getSingleUser } from '../../lib/api'
 import React from 'react'
 
 
-/// get user 
-
 function UserCard() {
   console.log('UserCard is on')
   const isLoggedIn = isAuthenticated()
   const { userId } = useParams()
   const [user, setUser] = React.useState(null)
-  const following = []
+  const [edit, setEdit] = React.useState(false)
 
-  console.log({userId})
+  // console.log({ userId })
 
   const handleEdit = () => {
-    console.log('click')
+    console.log('edit profile')
   }
 
   const handleFollow = () => {
-    console.log(userId)
+    const following = []
+    following.push(user.username)
+    console.log(following)
+    
   }
+
+  
 
   React.useEffect(() => {
     const getData = async () => {
