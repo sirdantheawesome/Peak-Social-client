@@ -10,22 +10,22 @@ function UserCard() {
   const isLoggedIn = isAuthenticated()
   const { userId } = useParams()
   const [user, setUser] = React.useState(null)
-  const [edit, setEdit] = React.useState(false)
+  const [popup, setPopup] = React.useState('modal')
 
-  // console.log({ userId })
 
-  const handleEdit = () => {
-    console.log('edit profile')
+  const handleClick = () => {
+    console.log('click')
+    setPopup('modal is-active')
   }
 
-  const handleFollow = () => {
-    const following = []
-    following.push(user.username)
-    console.log(following)
-    
+  const handleClose = () => {
+    console.log('close')
+    setPopup('modal')
   }
 
-  
+  const handleChange = (e) => {
+    console.log(e.target.value)
+  }
 
   React.useEffect(() => {
     const getData = async () => {
@@ -40,7 +40,8 @@ function UserCard() {
     }
     getData()
   }, [userId])
-  console.log('user: ', user)
+
+
   if (!user) return null
   return (
     <div className="user-card">
@@ -56,11 +57,57 @@ function UserCard() {
         <p>{user.summary}</p>
       </div>
       {isLoggedIn ?
-        <button className="button is-outlined" onClick={handleEdit}>Edit Profile</button>
+        <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
         :
-        <button className="button is-outlined" onClick={handleFollow}>Follow</button>
+        <button className="button is-outlined">Follow</button>
       }
+      <div className={popup}>
+        <section className="modal-card-body">
+          <div className="modal"></div>
+          <div className="modal-content">
+            <div className="field">
+              <label className="label" htmlFor>Profile Name</label>
+              <div className="control">
+                <input 
+                  className="input" 
+                  type="text" 
+                  placeholder="Your Profile Name"
+                  onChange={handleChange}/>
+                  
+              </div>
+            </div>
 
+            <div className="field">
+              <label className="label"> Profile Picture </label>
+              <div className="control">
+                <input 
+                  className="input" 
+                  type="email" 
+                  placeholder="Image Url..."
+                  onChange={handleChange}/>
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Summary</label>
+              <div className="control">
+                <textarea 
+                  className="textarea" 
+                  type="email" 
+                  placeholder="About you..."
+                  onChange={handleChange}/>
+              </div>
+            </div>
+            
+            <button 
+              onClick={handleClose} 
+              className="delete" 
+              aria-label="close"/>
+            <button 
+              type="submit">Update Profile</button>
+          </div>
+        </section>
+      </div>
     </div>
 
   )
