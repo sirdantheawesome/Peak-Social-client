@@ -12,9 +12,11 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
     console.log('on')
   }
 
-  const handlePostClose = () => {
+  const handlePostClose = (event) => {
     setPopup('modal')
     console.log('off')
+    event.stopPropagation()
+    return
   }
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray }) {
           maxComments={2}
         />
         <div className={popup}>
-          <div className="modal-background"></div>
+          <div onClick={handlePostClose} className="modal-background"></div>
           <div className="modal-content">
             <PostSection
               title={title}
