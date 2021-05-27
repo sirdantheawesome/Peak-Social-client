@@ -32,7 +32,7 @@ export function editPost(postId, formdata) {
 }
 
 export function likePost(postId) {
-  return axios.post(`${baseUrl}/posts/${postId}`, headers())
+  return axios.post(`${baseUrl}/posts/${postId}`, null, headers())
 }
 
 export function deletePost(postId) {
@@ -56,7 +56,7 @@ export function editComment(postId, commentId, formdata) {
 }
 
 export function likeComment(postId, commentId) {
-  return axios.post(`${baseUrl}/posts/${postId}/comments/${commentId}`, headers())
+  return axios.post(`${baseUrl}/posts/${postId}/comments/${commentId}`, null, headers())
 }
 
 export function deleteComment(postId, commentId) {

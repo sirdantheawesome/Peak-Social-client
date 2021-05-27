@@ -3,7 +3,7 @@ import { getAllPosts } from '../../lib/api'
 import Error from '../common/Error'
 import PostCard from './PostCard'
 
-function PostIndex({popup, input}) {
+function PostIndex({ popup, input }) {
   const [posts, setPosts] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !posts && !isError
@@ -23,7 +23,7 @@ function PostIndex({popup, input}) {
 
   const filterPosts = () => {
     return (
-      posts.filter((post)=>{
+      posts.filter((post) => {
         return (
           post.title.toLowerCase().includes(input) || post.text.toLowerCase().includes(input)
         )
