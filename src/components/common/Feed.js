@@ -4,7 +4,7 @@ import UserCard from '../user/UserCard'
 import { isAuthenticated } from '../../lib/auth'
 import PostNew from '../posts/PostNew'
 
-function Feed() {
+function Feed({input}) {
 
   const [popup, setPopup] = React.useState('modal')
 
@@ -15,6 +15,8 @@ function Feed() {
   const handleClose = () => {
     setPopup('modal')
   }
+
+
   return (
     <>
 
@@ -45,7 +47,7 @@ function Feed() {
 
           </div>
           <div className="block">
-            <PostIndex popup={popup} />
+            <PostIndex popup={popup} input={input} />
           </div>
         </div>
         <div className="column">

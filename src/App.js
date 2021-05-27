@@ -3,16 +3,15 @@ import Home from './components/auth/Home'
 import Feed from './components/common/Feed'
 import UserFeed from './components/user/UserFeed'
 import Nav from './components/common/Nav'
+import Main from './components/common/Main'
 
 function App() {
   return (
 
     <Router>
-      <Nav />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/feed" component={Feed} />
-        <Route path="/profile/:userId" component={UserFeed} />
+        <Main />
       </Switch>
     </Router>
   )
