@@ -1,12 +1,12 @@
 import React from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
+import { isAuthor } from '../../lib/auth'
 import { getSingleUser, editUser } from '../../lib/api'
 import { useForm } from '../../hooks/useForm'
 
 
 function UserCard() {
-  const isLoggedIn = isAuthenticated()
+  
   const { userId } = useParams()
   const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
@@ -19,10 +19,12 @@ function UserCard() {
 
 
 
+
   React.useEffect(() => {
     const getData = async () => {
       try {
         const response = await getSingleUser(userId)
+        setFormdata(response.data)
         setUser(response.data)
         console.log(response.data)
       } catch (err) {
@@ -46,11 +48,12 @@ function UserCard() {
   const handleSubmit = async event => {
     event.preventDefault()
     try {
-      await editUser(userId, formdata)
+      editUser(userId, formdata)
       // handleClose()
       history.push('/feed')
     } catch (err) {
       setFormErrors(err.response.data.errors)
+      console.log(formErrors)
     }
   
   }
@@ -70,10 +73,10 @@ function UserCard() {
         <br />
         <p>{user.summary}</p>
       </div>
-      {isLoggedIn ?
+      {isAuthor(userId) ?
         <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
         :
-        <button className="button is-outlined">Follow</button>
+        <div/>
       }
       <div className={popup}>
         <section className="modal-card-body">

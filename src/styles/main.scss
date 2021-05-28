@@ -75,4 +75,8 @@ $box-padding: 1rem;
   background-color: rgb(254, 254, 254);
 }
 
+.hide {
+  display:none;
+}
+
 @import "~bulma/bulma.sass";
