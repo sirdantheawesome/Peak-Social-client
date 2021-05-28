@@ -10,7 +10,7 @@ function UserCard() {
   const { userId } = useParams()
   const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
-  const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm( {
+  const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm({
     username: '',
     image: '',
     summary: '',
@@ -52,7 +52,7 @@ function UserCard() {
     } catch (err) {
       setFormErrors(err.response.data.errors)
     }
-  
+
   }
 
 
@@ -82,24 +82,24 @@ function UserCard() {
             <div className="field">
               <label className="label" htmlFor>Profile Name</label>
               <div className="control">
-                <input 
-                  className={`input ${formErrors.username ? 'is-danger' : ''}`} 
-                  type="text" 
+                <input
+                  className={`input ${formErrors.username ? 'is-danger' : ''}`}
+                  type="text"
                   placeholder="Your Profile Name"
                   name="username"
                   onChange={handleChange}
                   value={formdata.username}
                 />
-                  
+
               </div>
             </div>
 
             <div className="field">
               <label className="label"> Profile Picture </label>
               <div className="control">
-                <input 
-                  className={`input ${formErrors.image ? 'is-danger' : ''}`} 
-                  type="text" 
+                <input
+                  className={`input ${formErrors.image ? 'is-danger' : ''}`}
+                  type="text"
                   placeholder="Image Url..."
                   name="image"
                   onChange={handleChange}
@@ -111,9 +111,9 @@ function UserCard() {
             <div className="field">
               <label className="label">Summary</label>
               <div className="control">
-                <textarea 
-                  className={`input ${formErrors.summary ? 'is-danger' : ''}`} 
-                  type="text" 
+                <textarea
+                  className={`input ${formErrors.summary ? 'is-danger' : ''}`}
+                  type="text"
                   placeholder="About you..."
                   name="summary"
                   onChange={handleChange}
@@ -121,13 +121,13 @@ function UserCard() {
                 />
               </div>
             </div>
-            
-            <button 
-              onClick={handleClose} 
-              className="delete" 
-              aria-label="close"/>
-            <button 
-              type="submit" 
+
+            <button
+              onClick={handleClose}
+              className="delete"
+              aria-label="close" />
+            <button
+              type="submit"
               onClick={handleSubmit}
             > Update Profile</button>
           </div>

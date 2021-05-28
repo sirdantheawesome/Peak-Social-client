@@ -25,7 +25,7 @@ function UserFeed({ input }) {
   console.log('Profile page is here')
   return (
     <>
-      <section className="hero is-link is-fullheight-with-navbar">
+      <section className="is-link is-fullheight-with-navbar">
         <div className="columns">
           <div className="column">
             {isError && <Error />}
