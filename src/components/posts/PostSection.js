@@ -122,9 +122,9 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
         {
           isAuthor(userId) ?
             <>
-              <a onClick={handleSharePost} className="card-footer-item">Share</a>
+              {/* <a onClick={handleSharePost} className="card-footer-item">Share</a> */}
               <a onClick={handleCommentPost} className="card-footer-item">Comment</a>
-              <a onClick={handleEditPost} className="card-footer-item">Edit</a>
+              {/* <a onClick={handleEditPost} className="card-footer-item">Edit</a> */}
               <a onClick={handleDeletePost} className="card-footer-item has-text-danger is-danger">Delete</a>
             </>
             :
@@ -135,7 +135,7 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
                 }
               </a>
               <a onClick={handleCommentPost} className="card-footer-item">Comment</a>
-              <a onClick={handleSharePost} className="card-footer-item">Share</a>
+              {/* <a onClick={handleSharePost} className="card-footer-item">Share</a> */}
             </>
         }
       </footer>

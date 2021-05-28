@@ -3,9 +3,11 @@ import UserCard from './UserCard'
 import { getAllPosts } from '../../lib/api'
 import Error from '../../components/common/Error'
 import PostIndex from '../posts/PostIndex'
+import { useParams } from 'react-router-dom'
 
 function UserFeed({ input }) {
 
+  const { userId } = useParams()
   const [posts, setPosts] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !posts && !isError
@@ -21,10 +23,17 @@ function UserFeed({ input }) {
     }
     getData()
   }, [])
-  console.log('Profile page is here')
+
+
+  console.log(userId)
+
   return (
     <>
+<<<<<<< HEAD
       <section className="is-link is-fullheight-with-navbar">
+=======
+      <section className="  is-fullheight-with-navbar">
+>>>>>>> development
         <div className="columns">
           <div className="column">
             {isError && <Error />}
@@ -32,18 +41,9 @@ function UserFeed({ input }) {
             <UserCard />
           </div>
           <div className="column is-half">
-            <PostIndex input={input} />
-            {/* <div className="block">
-              <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
-            </div>
-            <div className="block">
-              {posts && (
-                posts.map(post => <PostCard key={post.id} {...post} />)
-              )}
-            </div> */}
+            <PostIndex input={input} userId={userId} />
           </div>
           <div className="column">
-            <p>Following</p>
           </div>
         </div>
       </section>

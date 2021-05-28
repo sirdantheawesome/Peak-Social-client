@@ -3,7 +3,7 @@ import { getAllPosts } from '../../lib/api'
 import Error from '../common/Error'
 import PostCard from './PostCard'
 
-function PostIndex({ popup, input }) {
+function PostIndex({ popup, input, userId }) {
   const [posts, setPosts] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !posts && !isError
@@ -35,17 +35,30 @@ function PostIndex({ popup, input }) {
     setPosts(updatedPosts)
   }
 
-  const filterPosts = () => {
+  const filterPosts = (userId) => {
     return (
       posts.filter((post) => {
+        if (userId) {
+          return (
+            (post.title.toLowerCase().includes(input) ||
+              post.text.toLowerCase().includes(input) ||
+              post.user.username.toLowerCase().includes(input))
+            && (post.user._id.includes(userId))
+          )
+        }
+
         return (
-          post.title.toLowerCase().includes(input) || post.text.toLowerCase().includes(input) || post.user.username.toLowerCase().includes(input)
+          (post.title.toLowerCase().includes(input) ||
+            post.text.toLowerCase().includes(input) ||
+            post.user.username.toLowerCase().includes(input))
         )
       })
+
     )
   }
 
-  console.log('index')
+
+
   return (
     <section className='section'>
       <div className='container'>
@@ -53,7 +66,7 @@ function PostIndex({ popup, input }) {
           {isError && <Error />}
           {isLoading && <p className="subtitle has-text-centered is-fullwidth">...Loading</p>}
           {posts &&
-            filterPosts().map((post) => (
+            filterPosts(userId).map((post) => (
               <PostCard
                 key={post._id}
                 title={post.title}

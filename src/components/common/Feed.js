@@ -1,6 +1,5 @@
 import React from 'react'
 import PostIndex from '../posts/PostIndex'
-import UserCard from '../user/UserCard'
 import { isAuthenticated } from '../../lib/auth'
 import PostNew from '../posts/PostNew'
 import { useHistory } from 'react-router'
@@ -47,9 +46,8 @@ function Feed({ input }) {
 
       <div className="columns is-desktop">
         <div className="column">
-          <UserCard />
         </div>
-        <div className="column is-full-mobile is-full-tablet is-two-thirds-desktop is-half-widescreen is-one-third-fullhd">
+        <div className="column is-full-mobile is-full-tablet is-two-thirds-desktop is-two-thirds-widescreen is-two-thirds-fullhd">
           <div className="block">
 
             <form onSubmit={handleSubmit} >
@@ -81,7 +79,6 @@ function Feed({ input }) {
           </div>
         </div>
         <div className="column">
-          <p>Following</p>
         </div>
       </div>
 
