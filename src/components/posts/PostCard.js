@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { getSingleUser } from '../../lib/api'
 import PostSection from './PostSection'
 import CommentSection from './CommentSection'
-import { likePost as apiLikePost } from '../../lib/api'
+import { likePost } from '../../lib/api'
+import { getToken, isAuthenticated } from '../../lib/auth'
 
 function PostCard({ title, text, image, userId, comments, likedByArray, postId }) {
   const [author, setAuthor] = useState(null)
@@ -32,34 +33,40 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId }
     getData()
   }, [userId])
 
-  const likePost = async (event) => {
+  const handleLikePost = async (event) => {
+    event.stopPropagation()
+    console.log('User passes Auth: ', isAuthenticated(), 'postId: ', postId, 'token: ', getToken())
     try {
-      await apiLikePost(postId)
+      await likePost(postId)
+      this.forceUpdate()
     } catch (e) {
       console.warn(e)
     }
     console.log('Liked post of title: ', title)
-    event.stopPropagation()
   }
 
-  const commentPost = async (event) => {
+  const handleCommentPost = async (event) => {
+    event.stopPropagation()
     console.log('Commented post of title: ', title)
-    event.stopPropagation()
+
   }
 
-  const sharePost = async (event) => {
+  const handleSharePost = async (event) => {
+    event.stopPropagation()
     console.log('Shared post of title: ', title)
-    event.stopPropagation()
+
   }
 
-  const editPost = async (event) => {
+  const handleEditPost = async (event) => {
+    event.stopPropagation()
     console.log('Edtied post of title: ', title)
-    event.stopPropagation()
+
   }
 
-  const deletePost = async (event) => {
-    console.log('Deleted post of title: ', title)
+  const handleDeletePost = async (event) => {
     event.stopPropagation()
+    console.log('Deleted post of title: ', title)
+
   }
   return (
     <div className='column is-full'>
@@ -71,11 +78,11 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId }
           userId={userId}
           likedByArray={likedByArray}
           author={author}
-          likePost={likePost}
-          commentPost={commentPost}
-          sharePost={sharePost}
-          editPost={editPost}
-          deletePost={deletePost}
+          handleLikePost={handleLikePost}
+          handleCommentPost={handleCommentPost}
+          handleSharePost={handleSharePost}
+          editPost={handleEditPost}
+          deletePost={handleDeletePost}
         />
         {comments &&
           <CommentSection
@@ -93,11 +100,11 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId }
               userId={userId}
               likedByArray={likedByArray}
               author={author}
-              likePost={likePost}
-              commentPost={commentPost}
-              sharePost={sharePost}
-              editPost={editPost}
-              deletePost={deletePost}
+              handleLikePost={handleLikePost}
+              handleCommentPost={handleCommentPost}
+              handleSharePost={handleSharePost}
+              handleEditPost={handleEditPost}
+              handleDeletePost={handleDeletePost}
             />
             <CommentSection
               comments={comments}

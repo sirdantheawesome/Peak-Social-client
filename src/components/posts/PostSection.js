@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { getSingleUser } from '../../lib/api'
 import { isAuthor } from '../../lib/auth'
 
-function PostSection({ title, userId, author, image, text, likedByArray, likePost, commentPost, sharePost, editPost, deletePost }) {
+function PostSection({ title, userId, author, image, text, likedByArray, handleLikePost, handleCommentPost, handleSharePost, handleEditPost, handleDeletePost }) {
   const [likedNames, setLikedNames] = useState([])
   useEffect(() => {
     const getData = async () => {
@@ -72,16 +72,16 @@ function PostSection({ title, userId, author, image, text, likedByArray, likePos
         {
           isAuthor(userId) ?
             <>
-              <a onClick={likePost} className="card-footer-item">Share</a>
-              <a onClick={commentPost} className="card-footer-item">Comment</a>
-              <a onClick={editPost} className="card-footer-item">Edit</a>
-              <a onClick={deletePost} className="card-footer-item has-text-danger is-danger">Delete</a>
+              <a onClick={handleLikePost} className="card-footer-item">Share</a>
+              <a onClick={handleCommentPost} className="card-footer-item">Comment</a>
+              <a onClick={handleEditPost} className="card-footer-item">Edit</a>
+              <a onClick={handleDeletePost} className="card-footer-item has-text-danger is-danger">Delete</a>
             </>
             :
             <>
-              <a onClick={likePost} className="card-footer-item">Like</a>
-              <a onClick={commentPost} className="card-footer-item">Comment</a>
-              <a onClick={sharePost} className="card-footer-item">Share</a>
+              <a onClick={handleLikePost} className="card-footer-item">Like</a>
+              <a onClick={handleCommentPost} className="card-footer-item">Comment</a>
+              <a onClick={handleSharePost} className="card-footer-item">Share</a>
             </>
         }
       </footer>

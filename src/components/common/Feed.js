@@ -4,7 +4,7 @@ import UserCard from '../user/UserCard'
 import { isAuthenticated } from '../../lib/auth'
 import PostNew from '../posts/PostNew'
 
-function Feed({input}) {
+function Feed({ input }) {
 
   const [popup, setPopup] = React.useState('modal')
 
