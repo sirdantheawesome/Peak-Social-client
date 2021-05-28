@@ -1,17 +1,37 @@
-
-import { useParams } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
-import { getSingleUser } from '../../lib/api'
 import React from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { isAuthenticated } from '../../lib/auth'
+import { getSingleUser, editUser } from '../../lib/api'
+import { useForm } from '../../hooks/useForm'
 
 
 function UserCard() {
-  console.log('UserCard is on')
   const isLoggedIn = isAuthenticated()
   const { userId } = useParams()
   const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
+  const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm( {
+    username: '',
+    image: '',
+    summary: '',
+  })
+  const history = useHistory()
 
+
+
+  React.useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await getSingleUser(userId)
+        setUser(response.data)
+        console.log(response.data)
+      } catch (err) {
+        setFormErrors(err.response.data.errors)
+        console.log(err)
+      }
+    }
+    getData()
+  }, [userId, setFormdata, setFormErrors])
 
   const handleClick = () => {
     console.log('click')
@@ -23,23 +43,17 @@ function UserCard() {
     setPopup('modal')
   }
 
-  const handleChange = (e) => {
-    console.log(e.target.value)
-  }
-
-  React.useEffect(() => {
-    const getData = async () => {
-      try {
-        console.log('im trying')
-        const response = await getSingleUser(userId)
-        setUser(response.data)
-        console.log(response.data)
-      } catch (err) {
-        console.log(err)
-      }
+  const handleSubmit = async event => {
+    event.preventDefault()
+    try {
+      await editUser(userId, formdata)
+      // handleClose()
+      history.push('/feed')
+    } catch (err) {
+      setFormErrors(err.response.data.errors)
     }
-    getData()
-  }, [userId])
+  
+  }
 
 
   if (!user) return null
@@ -69,10 +83,13 @@ function UserCard() {
               <label className="label" htmlFor>Profile Name</label>
               <div className="control">
                 <input 
-                  className="input" 
+                  className={`input ${formErrors.username ? 'is-danger' : ''}`} 
                   type="text" 
                   placeholder="Your Profile Name"
-                  onChange={handleChange}/>
+                  name="username"
+                  onChange={handleChange}
+                  value={formdata.username}
+                />
                   
               </div>
             </div>
@@ -81,10 +98,13 @@ function UserCard() {
               <label className="label"> Profile Picture </label>
               <div className="control">
                 <input 
-                  className="input" 
-                  type="email" 
+                  className={`input ${formErrors.image ? 'is-danger' : ''}`} 
+                  type="text" 
                   placeholder="Image Url..."
-                  onChange={handleChange}/>
+                  name="image"
+                  onChange={handleChange}
+                  value={formdata.image}
+                />
               </div>
             </div>
 
@@ -92,10 +112,13 @@ function UserCard() {
               <label className="label">Summary</label>
               <div className="control">
                 <textarea 
-                  className="textarea" 
-                  type="email" 
+                  className={`input ${formErrors.summary ? 'is-danger' : ''}`} 
+                  type="text" 
                   placeholder="About you..."
-                  onChange={handleChange}/>
+                  name="summary"
+                  onChange={handleChange}
+                  value={formdata.summary}
+                />
               </div>
             </div>
             
@@ -104,7 +127,9 @@ function UserCard() {
               className="delete" 
               aria-label="close"/>
             <button 
-              type="submit">Update Profile</button>
+              type="submit" 
+              onClick={handleSubmit}
+            > Update Profile</button>
           </div>
         </section>
       </div>
