@@ -35,7 +35,7 @@ function UserCard() {
     getData()
   }, [userId, setFormdata, setFormErrors])
 
-  console.log(formErrors)
+  console.log(userId)
 
   const handleClick = () => {
     console.log('click')
