@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getSingleUser, likePost } from '../../lib/api'
+import { deletePost, getSingleUser, likePost } from '../../lib/api'
 import { getCurrentUserId, getToken, isAuthenticated, isAuthor } from '../../lib/auth'
 
 function PostSection({ title, userId, author, image, text, likedByArray, postId, handleUpdatePosts }) {
@@ -58,6 +58,13 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
 
   const handleDeletePost = async (event) => {
     event.stopPropagation()
+    try {
+      const res = await deletePost(postId)
+      handleUpdatePosts(res.data)
+      location.reload()
+    } catch (e) {
+      console.warn(e)
+    }
     console.log('Deleted post of title: ', title)
 
   }
@@ -97,7 +104,6 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
         </div>
         <h3>
           {likedByArray.length > 0 ? 'Liked By:' : ''}
-          {console.log(likedByArray)}
         </h3>
         <h4>
           {
