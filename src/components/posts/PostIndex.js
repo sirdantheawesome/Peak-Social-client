@@ -20,6 +20,18 @@ function PostIndex({ popup, input }) {
     getData()
   }, [popup, input])
 
+  const handleUpdatePosts = (updatedPost) => {
+    console.log(updatedPost)
+    const updatedPosts = posts.map((post) => {
+      if (updatedPost._id !== post._id) {
+        return post
+      }
+      return updatedPost
+
+    })
+    console.log(updatedPosts)
+    setPosts(updatedPosts)
+  }
 
   const filterPosts = () => {
     return (
@@ -49,6 +61,7 @@ function PostIndex({ popup, input }) {
                 comments={post.comments}
                 likedByArray={post.userlikes}
                 postId={post._id}
+                handleUpdatePosts={handleUpdatePosts}
               />
             ))
           }
