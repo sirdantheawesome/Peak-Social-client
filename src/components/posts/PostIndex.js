@@ -25,6 +25,8 @@ function PostIndex({ popup, input }) {
     const updatedPosts = posts.map((post) => {
       if (updatedPost._id !== post._id) {
         return post
+      } else if (!updatedPost) {
+        location.reload()
       }
       return updatedPost
 

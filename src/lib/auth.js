@@ -34,6 +34,5 @@ export function isAuthor(userId) {
 export function getCurrentUserId() {
   const payload = getPayload()
   if (!isAuthenticated()) return null
-  console.log(payload.userId)
   return payload.userId
 }

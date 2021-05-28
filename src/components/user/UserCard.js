@@ -8,7 +8,7 @@ import { useForm } from '../../hooks/useForm'
 function UserCard() {
   
   const { userId } = useParams()
-  const [user, setUser] = React.useState(null)
+  // const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
   const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm( {
     username: '',
@@ -24,16 +24,19 @@ function UserCard() {
     const getData = async () => {
       try {
         const response = await getSingleUser(userId)
+        
         setFormdata(response.data)
-        setUser(response.data)
+        // setUser(response.data)
         console.log(response.data)
       } catch (err) {
-        setFormErrors(err.response.data.errors)
         console.log(err)
+        
       }
     }
     getData()
   }, [userId, setFormdata, setFormErrors])
+
+  console.log(formErrors)
 
   const handleClick = () => {
     console.log('click')
@@ -59,19 +62,19 @@ function UserCard() {
   }
 
 
-  if (!user) return null
+  if (!formdata) return null
   return (
     <div className="user-card">
       <div className="card-image">
         <figure className="image is-128x128">
-          <img className="is-rounded" src={user.image} alt={user.username} />
+          <img className="is-rounded" src={formdata.image} alt={formdata.username} />
         </figure>
         <br />
       </div>
       <div className="content">
-        <p>{user.username}</p> <p>PeekCoins : {user.peekcoin}</p>
+        <p>{formdata.username}</p> <p>PeekCoins : {formdata.peekcoin}</p>
         <br />
-        <p>{user.summary}</p>
+        <p>{formdata.summary}</p>
       </div>
       {isAuthor(userId) ?
         <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
@@ -95,6 +98,9 @@ function UserCard() {
                 />
                   
               </div>
+              {formErrors.username && (
+                <small className="help is-danger">Username is required</small>
+              )}
             </div>
 
             <div className="field">
@@ -109,6 +115,7 @@ function UserCard() {
                   value={formdata.image}
                 />
               </div>
+              
             </div>
 
             <div className="field">
