@@ -1,41 +1,61 @@
-
-import { useParams } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
-import { getSingleUser } from '../../lib/api'
 import React from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { isAuthenticated } from '../../lib/auth'
+import { getSingleUser, editUser } from '../../lib/api'
+import { useForm } from '../../hooks/useForm'
 
-
-/// get user 
 
 function UserCard() {
-  console.log('UserCard is on')
   const isLoggedIn = isAuthenticated()
   const { userId } = useParams()
   const [user, setUser] = React.useState(null)
-  const following = []
+  const [popup, setPopup] = React.useState('modal')
+  const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm( {
+    username: '',
+    image: '',
+    summary: '',
+  })
+  const history = useHistory()
 
-  const handleEdit = () => {
-    console.log('click')
-  }
 
-  const handleFollow = () => {
-    console.log(userId)
-  }
 
   React.useEffect(() => {
     const getData = async () => {
       try {
-        console.log('im trying')
         const response = await getSingleUser(userId)
         setUser(response.data)
         console.log(response.data)
       } catch (err) {
+        setFormErrors(err.response.data.errors)
         console.log(err)
       }
     }
     getData()
-  }, [])
-  console.log('user: ', user)
+  }, [userId, setFormdata, setFormErrors])
+
+  const handleClick = () => {
+    console.log('click')
+    setPopup('modal is-active')
+  }
+
+  const handleClose = () => {
+    console.log('close')
+    setPopup('modal')
+  }
+
+  const handleSubmit = async event => {
+    event.preventDefault()
+    try {
+      await editUser(userId, formdata)
+      // handleClose()
+      history.push('/feed')
+    } catch (err) {
+      setFormErrors(err.response.data.errors)
+    }
+  
+  }
+
+
   if (!user) return null
   return (
     <div className="user-card">
@@ -51,11 +71,68 @@ function UserCard() {
         <p>{user.summary}</p>
       </div>
       {isLoggedIn ?
-        <button className="button is-outlined" onClick={handleEdit}>Edit Profile</button>
+        <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
         :
-        <button className="button is-outlined" onClick={handleFollow}>Follow</button>
+        <button className="button is-outlined">Follow</button>
       }
+      <div className={popup}>
+        <section className="modal-card-body">
+          <div className="modal"></div>
+          <div className="modal-content">
+            <div className="field">
+              <label className="label" htmlFor>Profile Name</label>
+              <div className="control">
+                <input 
+                  className={`input ${formErrors.username ? 'is-danger' : ''}`} 
+                  type="text" 
+                  placeholder="Your Profile Name"
+                  name="username"
+                  onChange={handleChange}
+                  value={formdata.username}
+                />
+                  
+              </div>
+            </div>
 
+            <div className="field">
+              <label className="label"> Profile Picture </label>
+              <div className="control">
+                <input 
+                  className={`input ${formErrors.image ? 'is-danger' : ''}`} 
+                  type="text" 
+                  placeholder="Image Url..."
+                  name="image"
+                  onChange={handleChange}
+                  value={formdata.image}
+                />
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Summary</label>
+              <div className="control">
+                <textarea 
+                  className={`input ${formErrors.summary ? 'is-danger' : ''}`} 
+                  type="text" 
+                  placeholder="About you..."
+                  name="summary"
+                  onChange={handleChange}
+                  value={formdata.summary}
+                />
+              </div>
+            </div>
+            
+            <button 
+              onClick={handleClose} 
+              className="delete" 
+              aria-label="close"/>
+            <button 
+              type="submit" 
+              onClick={handleSubmit}
+            > Update Profile</button>
+          </div>
+        </section>
+      </div>
     </div>
 
   )
