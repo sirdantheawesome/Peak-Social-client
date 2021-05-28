@@ -3,10 +3,18 @@ import PostIndex from '../posts/PostIndex'
 import UserCard from '../user/UserCard'
 import { isAuthenticated } from '../../lib/auth'
 import PostNew from '../posts/PostNew'
+import { useHistory } from 'react-router'
+import { useForm } from '../../hooks/useForm'
+import { createPost } from '../../lib/api'
 
 function Feed({ input }) {
-
+  const history = useHistory()
   const [popup, setPopup] = React.useState('modal')
+
+  const { formdata,  handleChange } = useForm({
+    title: 'whats on my mind',
+    text: '',
+  })
 
   const handleClick = () => {
     setPopup('modal is-active')
@@ -15,6 +23,23 @@ function Feed({ input }) {
   const handleClose = () => {
     setPopup('modal')
   }
+
+  const handleSubmit = async () => {
+
+    if (!isAuthenticated()) {
+      history.push('/')
+    }
+
+    try {
+      await createPost(formdata)
+
+      history.push('/feed')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
 
 
   return (
@@ -26,7 +51,12 @@ function Feed({ input }) {
         </div>
         <div className="column is-full-mobile is-full-tablet is-two-thirds-desktop is-half-widescreen is-one-third-fullhd">
           <div className="block">
-            <input className="input is-medium" type="text" placeholder="Whats on your mind??" />
+
+            <form onSubmit={handleSubmit} >
+              <input onChange={handleChange} className="input is-medium" type="text" name="text" placeholder="Whats on your mind??" />
+            </form>
+
+
             {isAuthenticated() && (
               <>
                 <button onClick={handleClick} className="button"> create a new post</button>
