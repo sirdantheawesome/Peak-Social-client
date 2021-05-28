@@ -2,9 +2,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { getCurrentUserId, isAuthenticated, removeToken } from '../../lib/auth'
 import React from 'react'
 
-function Nav({setInput}) {
+function Nav({ setInput }) {
 
-  
+
 
   const history = useHistory()
   const isLoggedIn = isAuthenticated()
@@ -16,7 +16,7 @@ function Nav({setInput}) {
 
   const handleInput = (e) => {
     setInput(e.target.value)
-    
+
   }
 
   return (

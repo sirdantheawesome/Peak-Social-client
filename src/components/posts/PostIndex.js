@@ -25,7 +25,7 @@ function PostIndex({ popup, input }) {
     return (
       posts.filter((post) => {
         return (
-          post.title.toLowerCase().includes(input) || post.text.toLowerCase().includes(input)
+          post.title.toLowerCase().includes(input) || post.text.toLowerCase().includes(input) || post.user.username.toLowerCase().includes(input)
         )
       })
     )
@@ -45,7 +45,7 @@ function PostIndex({ popup, input }) {
                 title={post.title}
                 image={post.image}
                 text={post.text}
-                userId={post.user}
+                userId={post.user._id}
                 comments={post.comments}
                 likedByArray={post.userlikes}
                 postId={post._id}
