@@ -6,7 +6,7 @@ import { useForm } from '../../hooks/useForm'
 
 
 function UserCard() {
-  
+
   const { userId } = useParams()
   // const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
@@ -23,13 +23,13 @@ function UserCard() {
     const getData = async () => {
       try {
         const response = await getSingleUser(userId)
-        
+
         setFormdata(response.data)
         // setUser(response.data)
         console.log(response.data)
       } catch (err) {
         console.log(err)
-        
+
       }
     }
     getData()
@@ -77,7 +77,7 @@ function UserCard() {
       {isAuthor(userId) ?
         <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
         :
-        <div/>
+        <div />
       }
       <div className={popup}>
         <section className="modal-card-body">
@@ -113,7 +113,7 @@ function UserCard() {
                   value={formdata.image}
                 />
               </div>
-              
+
             </div>
 
             <div className="field">
