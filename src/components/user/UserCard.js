@@ -1,14 +1,14 @@
 import React from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
+import { isAuthor } from '../../lib/auth'
 import { getSingleUser, editUser } from '../../lib/api'
 import { useForm } from '../../hooks/useForm'
 
 
 function UserCard() {
-  const isLoggedIn = isAuthenticated()
+  
   const { userId } = useParams()
-  const [user, setUser] = React.useState(null)
+  // const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
   const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm({
     username: '',
@@ -23,15 +23,19 @@ function UserCard() {
     const getData = async () => {
       try {
         const response = await getSingleUser(userId)
-        setUser(response.data)
+        
+        setFormdata(response.data)
+        // setUser(response.data)
         console.log(response.data)
       } catch (err) {
-        setFormErrors(err.response.data.errors)
         console.log(err)
+        
       }
     }
     getData()
   }, [userId, setFormdata, setFormErrors])
+
+  console.log(formErrors)
 
   const handleClick = () => {
     console.log('click')
@@ -56,24 +60,24 @@ function UserCard() {
   }
 
 
-  if (!user) return null
+  if (!formdata) return null
   return (
     <div className="user-card">
       <div className="card-image">
         <figure className="image is-128x128">
-          <img className="is-rounded" src={user.image} alt={user.username} />
+          <img className="is-rounded" src={formdata.image} alt={formdata.username} />
         </figure>
         <br />
       </div>
       <div className="content">
-        <p>{user.username}</p> <p>PeekCoins : {user.peekcoin}</p>
+        <p>{formdata.username}</p> <p>PeekCoins : {formdata.peekcoin}</p>
         <br />
-        <p>{user.summary}</p>
+        <p>{formdata.summary}</p>
       </div>
-      {isLoggedIn ?
+      {isAuthor(userId) ?
         <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
         :
-        <button className="button is-outlined">Follow</button>
+        <div/>
       }
       <div className={popup}>
         <section className="modal-card-body">
@@ -92,6 +96,9 @@ function UserCard() {
                 />
 
               </div>
+              {formErrors.username && (
+                <small className="help is-danger">Username is required</small>
+              )}
             </div>
 
             <div className="field">
@@ -106,6 +113,7 @@ function UserCard() {
                   value={formdata.image}
                 />
               </div>
+              
             </div>
 
             <div className="field">

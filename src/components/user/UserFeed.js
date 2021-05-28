@@ -2,7 +2,6 @@ import React from 'react'
 import UserCard from './UserCard'
 import { getAllPosts } from '../../lib/api'
 import Error from '../../components/common/Error'
-import PostCard from '../posts/PostCard'
 import PostIndex from '../posts/PostIndex'
 
 function UserFeed({ input }) {
