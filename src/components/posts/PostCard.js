@@ -40,17 +40,17 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
   return (
     <div className='column is-full'>
       <div className={popup1}>
-                <div className="modal-background"></div>
-                <div className="modal-card">
-                  <header className="modal-card-head">
-                    <p className="modal-card-title">Create a new post!</p>
-                    <button onClick={handleClose} className="delete" aria-label="close"></button>
-                  </header>
-                  <section className="modal-card-body">
-                    <PostEdit setPopup1={setPopup1} postId={postId} handleUpdatePosts={handleUpdatePosts} />
-                  </section>
-                </div>
-              </div>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Create a new post!</p>
+            <button onClick={handleClose} className="delete" aria-label="close"></button>
+          </header>
+          <section className="modal-card-body">
+            <PostEdit setPopup1={setPopup1} postId={postId} handleUpdatePosts={handleUpdatePosts} />
+          </section>
+        </div>
+      </div>
       <div onClick={handlePostOpen} className="card m-5">
         <PostSection
           title={title}
