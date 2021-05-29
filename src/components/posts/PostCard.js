@@ -3,11 +3,13 @@ import { getSingleUser } from '../../lib/api'
 import PostSection from './PostSection'
 import CommentSection from './CommentSection'
 import PostEdit from './PostEdit'
+import PostComment from './PostComment'
 
 function PostCard({ title, text, image, userId, comments, likedByArray, postId, handleUpdatePosts }) {
   const [author, setAuthor] = useState(null)
   const [popup, setPopup] = useState('modal')
   const [popup1, setPopup1] = useState('modal')
+  const [popupComment, setPopupComment] = useState('modal')
 
   const handlePostOpen = () => {
     setPopup('modal is-active')
@@ -35,6 +37,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
 
   const handleClose = () => {
     setPopup1('modal')
+    setPopupComment('modal')
   }
 
   return (
@@ -43,11 +46,23 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
         <div className="modal-background"></div>
         <div className="modal-card">
           <header className="modal-card-head">
-            <p className="modal-card-title">Create a new post!</p>
+            <p className="modal-card-title">Edit your post!</p>
             <button onClick={handleClose} className="delete" aria-label="close"></button>
           </header>
           <section className="modal-card-body">
             <PostEdit setPopup1={setPopup1} postId={postId} handleUpdatePosts={handleUpdatePosts} />
+          </section>
+        </div>
+      </div>
+      <div className={popupComment}>
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Add a comment!</p>
+            <button onClick={handleClose} className="delete" aria-label="close"></button>
+          </header>
+          <section className="modal-card-body">
+            <PostComment setPopupComment={setPopupComment} postId={postId} handleUpdatePosts={handleUpdatePosts} />
           </section>
         </div>
       </div>
@@ -63,6 +78,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
           handleUpdatePosts={handleUpdatePosts}
           setPopup1={setPopup1}
           setPopup={setPopup}
+          setPopupComment={setPopupComment}
         />
         {comments &&
           <CommentSection
@@ -84,6 +100,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
               handleUpdatePosts={handleUpdatePosts}
               setPopup1={setPopup1}
               setPopup={setPopup}
+              setPopupComment={setPopupComment}
             />
             <CommentSection
               comments={comments}

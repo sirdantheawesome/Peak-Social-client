@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { deletePost, getSingleUser, likePost } from '../../lib/api'
 import { getCurrentUserId, getToken, isAuthenticated, isAuthor } from '../../lib/auth'
-import PostEdit from './PostEdit'
 
-function PostSection({ title, userId, author, image, text, likedByArray, postId, handleUpdatePosts, setPopup1, setPopup }) {
+
+function PostSection({ title, userId, author, image, text, likedByArray, postId, handleUpdatePosts, setPopup1, setPopup, setPopupComment }) {
   const [likedNames, setLikedNames] = useState([])
   const [likeText, setLikeText] = useState('Like')
-  // const [popup1, setPopup1] = useState('modal')
+
 
   useEffect(() => {
     likedByArray.includes(getCurrentUserId()) ? setLikeText('Unlike') : setLikeText('Like')
@@ -23,11 +23,7 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
     }
     getData()
   }, [likedByArray])
-  // console.log(likedByArray)
 
-  // const handleClose = () => {
-  //   setPopup1('modal')
-  // }
 
 
   const handleLikePost = async (event) => {
@@ -46,23 +42,22 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
 
   const handleCommentPost = async (event) => {
     event.stopPropagation()
+    setPopup('modal')
+    setPopupComment('modal is-active')
     console.log('Commented post of title: ', title)
-
   }
 
-  const handleSharePost = async (event) => {
-    event.stopPropagation()
-    console.log('Shared post of title: ', title)
+  // const handleSharePost = async (event) => {
+  //   event.stopPropagation()
+  //   console.log('Shared post of title: ', title)
 
-  }
+  // }
 
   const handleEditPost = async (event) => {
     event.stopPropagation()
     setPopup('modal')
     setPopup1('modal is-active')
-    
     console.log('Edtied post of title: ', title)
-    
   }
 
   const handleDeletePost = async (event) => {
@@ -134,18 +129,6 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
               {/* <a onClick={handleSharePost} className="card-footer-item">Share</a> */}
               <a onClick={handleCommentPost} className="card-footer-item">Comment</a>
               <a onClick={handleEditPost} className="card-footer-item">Edit</a>
-              {/* <div className={popup1}>
-                <div className="modal-background"></div>
-                <div className="modal-card">
-                  <header className="modal-card-head">
-                    <p className="modal-card-title">Create a new post!</p>
-                    <button onClick={handleClose} className="delete" aria-label="close"></button>
-                  </header>
-                  <section className="modal-card-body">
-                    <PostEdit setPopup1={setPopup1} postId={postId} handleUpdatePosts={handleUpdatePosts} />
-                  </section>
-                </div>
-              </div> */}
               <a onClick={handleDeletePost} className="card-footer-item has-text-danger is-danger">Delete</a>
             </>
             :
