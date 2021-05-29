@@ -8,7 +8,6 @@ import { useForm } from '../../hooks/useForm'
 function UserCard() {
   
   const { userId } = useParams()
-  // const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
   const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm( {
     username: '',
@@ -25,7 +24,6 @@ function UserCard() {
         const response = await getSingleUser(userId)
         
         setFormdata(response.data)
-        // setUser(response.data)
         console.log(response.data)
       } catch (err) {
         console.log(err)
@@ -51,7 +49,6 @@ function UserCard() {
     event.preventDefault()
     try {
       await editUser(userId, formdata)
-      // handleClose()
       history.push('/feed')
     } catch (err) {
       setFormErrors(err.response.data.errors)

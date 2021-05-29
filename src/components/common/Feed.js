@@ -10,14 +10,12 @@ function Feed({ input }) {
   const history = useHistory()
   const [popup, setPopup] = React.useState('modal')
 
-  const { formdata,  handleChange } = useForm({
+  const { formdata, handleChange } = useForm({
     title: 'whats on my mind',
     text: '',
   })
 
-  const handleClick = () => {
-    setPopup('modal is-active')
-  }
+
 
   const handleClose = () => {
     setPopup('modal')
@@ -38,7 +36,15 @@ function Feed({ input }) {
     }
   }
 
-
+  const handleClick = () => {
+    if (formdata.title === 'whats on my mind' && formdata.text.length > 1) {
+      handleSubmit()
+      history.push('/feed')
+      location.reload()
+    } else {
+      setPopup('modal is-active')
+    }
+  }
 
 
   return (
