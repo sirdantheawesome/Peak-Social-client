@@ -6,11 +6,10 @@ import { useForm } from '../../hooks/useForm'
 
 
 function UserCard() {
-  
+
   const { userId } = useParams()
-  // const [user, setUser] = React.useState(null)
   const [popup, setPopup] = React.useState('modal')
-  const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm( {
+  const { formdata, setFormdata, formErrors, setFormErrors, handleChange } = useForm({
     username: '',
     image: '',
     summary: '',
@@ -24,13 +23,12 @@ function UserCard() {
     const getData = async () => {
       try {
         const response = await getSingleUser(userId)
-        
+
         setFormdata(response.data)
-        // setUser(response.data)
         console.log(response.data)
       } catch (err) {
         console.log(err)
-        
+
       }
     }
     getData()
@@ -51,14 +49,13 @@ function UserCard() {
   const handleSubmit = async event => {
     event.preventDefault()
     try {
-      editUser(userId, formdata)
-      // handleClose()
+      await editUser(userId, formdata)
       history.push('/feed')
     } catch (err) {
       setFormErrors(err.response.data.errors)
       console.log(formErrors)
     }
-  
+
   }
 
 
@@ -79,7 +76,7 @@ function UserCard() {
       {isAuthor(userId) ?
         <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
         :
-        <div/>
+        <div />
       }
       <div className={popup}>
         <section className="modal-card-body">
@@ -88,15 +85,15 @@ function UserCard() {
             <div className="field">
               <label className="label" htmlFor>Profile Name</label>
               <div className="control">
-                <input 
-                  className={`input ${formErrors.username ? 'is-danger' : ''}`} 
-                  type="text" 
+                <input
+                  className={`input ${formErrors.username ? 'is-danger' : ''}`}
+                  type="text"
                   placeholder="Your Profile Name"
                   name="username"
                   onChange={handleChange}
                   value={formdata.username}
                 />
-                  
+
               </div>
               {formErrors.username && (
                 <small className="help is-danger">Username is required</small>
@@ -106,24 +103,24 @@ function UserCard() {
             <div className="field">
               <label className="label"> Profile Picture </label>
               <div className="control">
-                <input 
-                  className={`input ${formErrors.image ? 'is-danger' : ''}`} 
-                  type="text" 
+                <input
+                  className={`input ${formErrors.image ? 'is-danger' : ''}`}
+                  type="text"
                   placeholder="Image Url..."
                   name="image"
                   onChange={handleChange}
                   value={formdata.image}
                 />
               </div>
-              
+
             </div>
 
             <div className="field">
               <label className="label">Summary</label>
               <div className="control">
-                <textarea 
-                  className={`input ${formErrors.summary ? 'is-danger' : ''}`} 
-                  type="text" 
+                <textarea
+                  className={`input ${formErrors.summary ? 'is-danger' : ''}`}
+                  type="text"
                   placeholder="About you..."
                   name="summary"
                   onChange={handleChange}
@@ -131,13 +128,13 @@ function UserCard() {
                 />
               </div>
             </div>
-            
-            <button 
-              onClick={handleClose} 
-              className="delete" 
-              aria-label="close"/>
-            <button 
-              type="submit" 
+
+            <button
+              onClick={handleClose}
+              className="delete"
+              aria-label="close" />
+            <button
+              type="submit"
               onClick={handleSubmit}
             > Update Profile</button>
           </div>
