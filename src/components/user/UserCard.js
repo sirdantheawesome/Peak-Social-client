@@ -66,8 +66,8 @@ function UserCard() {
   return (
     <div className="user-card">
       <div className="card-image">
-        <figure className="image is-128x128">
-          <img className="is-rounded" src={formdata.image} alt={formdata.username} />
+        <figure>
+          <img className="profile-image" src={formdata.image} alt={formdata.username} />
         </figure>
         <br />
       </div>

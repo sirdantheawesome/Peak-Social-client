@@ -1,3 +1,5 @@
+
+
 .card {
   height: 100%;
   display: flex;
@@ -37,7 +39,7 @@ p {
 $blue: #4db3f2;
 $footer-background-color: #363636;
 $footer-padding: 2rem 1.5rem;
-$card-header-background-color: $blue;
+$card-header-background-color: #FFE74C;
 $box-padding: 1rem;
 
 .control {
@@ -77,6 +79,23 @@ $box-padding: 1rem;
 
 .hide {
   display:none;
+}
+
+.button {
+  margin-top: 10px;
+}
+
+
+.user-card {
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  
+}
+
+.profile-image {
+  margin: 20px;
+  
 }
 
 @import "~bulma/bulma.sass";
