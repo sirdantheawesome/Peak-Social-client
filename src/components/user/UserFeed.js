@@ -29,7 +29,7 @@ function UserFeed({ input }) {
 
   return (
     <>
-      <section className="  is-fullheight-with-navbar">
+      <section className="is-fullheight-with-navbar">
         <div className="columns">
           <div className="column">
             {isError && <Error />}
