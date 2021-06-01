@@ -26,8 +26,7 @@ function Login() {
 
   return (
 
-
-    <div className="container ">
+    <div className="container">
       <form
         className="column is-half is-offset-one-quarter"
         onSubmit={handleSubmit}

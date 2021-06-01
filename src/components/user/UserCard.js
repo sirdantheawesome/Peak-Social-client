@@ -63,15 +63,14 @@ function UserCard() {
   return (
     <div className="user-card">
       <div className="card-image">
-        <figure>
+        <figure className="image-container">
           <img className="profile-image" src={formdata.image} alt={formdata.username} />
         </figure>
-        <br />
       </div>
       <div className="content">
-        <p>{formdata.username}</p> <p>PeekCoins : {formdata.peekcoin}</p>
-        <br />
-        <p>{formdata.summary}</p>
+        <p className="username">{formdata.username}</p> 
+        <p className="summary">{formdata.summary}</p>
+        <p className="peekcoins">Peek Coins : {formdata.peekcoin}</p>
       </div>
       {isAuthor(userId) ?
         <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>

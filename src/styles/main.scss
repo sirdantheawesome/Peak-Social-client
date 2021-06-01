@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
 
 .card {
   height: 100%;
@@ -7,6 +7,11 @@
 }
 .card-content {
   margin-top: auto;
+  font-size: 20px;
+}
+
+.content {
+  font-size: 20px;
 }
 
 .logo-emoji {
@@ -29,11 +34,6 @@ section.section {
   flex-direction: row;
   display: flex;
   align-items: center;
-}
-
-p {
-  text-align: center;
-  font-size: 50px;
 }
 
 $blue: #4db3f2;
@@ -60,7 +60,9 @@ $box-padding: 1rem;
 }
 
 .user-card {
+  display:flex;
   text-align: center;
+  justify-content: center;
 }
 
 .comment-border {
@@ -85,17 +87,79 @@ $box-padding: 1rem;
   margin-top: 10px;
 }
 
-
 .user-card {
   display:flex;
   justify-content:center;
   flex-direction:column;
+  padding: 20px;
   
 }
 
-.profile-image {
-  margin: 20px;
-  
+.image-container {
+  padding: 10px;
+  margin-bottom: 0px;
+
 }
+
+.profile-image {
+  margin-top: 60px;   
+
+}
+
+.box {
+  box-shadow: none;
+}
+
+.intro {
+  font-size: 22px;
+  padding: 10px;
+  line-height: 200%;
+  color:gray;
+}
+
+.username {
+  font-size: 80px;
+  font-family: 'Amatic SC', cursive;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.summary {
+  font-size: 36px;
+  margin-left: 18px;
+}
+
+.button.is-outlined {
+  background-color:$blue;
+  margin-left: 10px;
+  font-size: 30px;
+  padding: 40px;
+  border-radius: 8px;
+}
+
+.section.is-mobile {
+  background-image: url('https://static.vecteezy.com/system/protected/files/001/206/198/vecteezy_mountain-icon_1206198.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  font-weight: bold;
+  }
+
+  .peek-title {
+    font-family: 'Amatic SC', cursive;
+    p { 
+      font-size: 100px;
+    }
+  }
+
+  .navbar-item {
+    margin-top: 30px;
+    button {
+      margin-bottom: 10px;
+    } 
+    input {
+      margin-top: 10px;
+    }
+  }
+
 
 @import "~bulma/bulma.sass";

@@ -16,6 +16,7 @@ function PostComment({ setPopupComment, postId, handleUpdatePosts }) {
       await createComment(postId, formdata)
       setPopupComment('modal')
       const res = await getSinglePost(postId)
+      location.reload()
       handleUpdatePosts(res.data)
     } catch (err) {
       setFormErrors(err.response.data.errors)
