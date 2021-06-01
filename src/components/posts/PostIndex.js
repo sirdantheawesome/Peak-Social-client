@@ -13,7 +13,7 @@ function PostIndex({ popup, input, userId }) {
       try {
         const res = await getAllPosts()
         setPosts(res.data.reverse())
-      } catch (error) {
+      } catch (err) {
         setIsError(true)
       }
     }
@@ -21,7 +21,7 @@ function PostIndex({ popup, input, userId }) {
   }, [popup, input])
 
   const handleUpdatePosts = (updatedPost) => {
-    console.log(updatedPost)
+    
     const updatedPosts = posts.map((post) => {
       if (updatedPost._id !== post._id) {
         return post
@@ -31,7 +31,7 @@ function PostIndex({ popup, input, userId }) {
       return updatedPost
 
     })
-    console.log(updatedPosts)
+    
     setPosts(updatedPosts)
   }
 

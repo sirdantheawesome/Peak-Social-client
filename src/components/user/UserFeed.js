@@ -25,7 +25,7 @@ function UserFeed({ input }) {
   }, [])
 
 
-  console.log(userId)
+
 
   return (
     <>

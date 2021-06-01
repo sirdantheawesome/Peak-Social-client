@@ -13,12 +13,12 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
 
   const handlePostOpen = () => {
     setPopup('modal is-active')
-    console.log('on')
+    
   }
 
   const handlePostClose = (event) => {
     setPopup('modal')
-    console.log('off')
+    
     event.stopPropagation()
     return
   }
@@ -28,7 +28,7 @@ function PostCard({ title, text, image, userId, comments, likedByArray, postId, 
       try {
         const res = await getSingleUser(userId)
         setAuthor(res.data)
-      } catch (e) {
+      } catch (err) {
         console.warn('Failed to fetch Author')
       }
     }

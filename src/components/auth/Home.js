@@ -30,7 +30,7 @@ function Home() {
       <div className="columns is-mobile is-centered">
         <div className="column is-half is-centered ">
           <Link to={'/feed'}>
-            <button type="submit" className="button is-fullwidth is-info is-large">Press to Peek</button>
+            <button type="submit" className="button is-fullwidth is-warning is-large">Press to Peek</button>
           </Link>
           <p className="intro">Welcome to Peek, where peeking and likes will help you earn peek coins to assist you on your climb to the top of the peek peak and showcase your popularity</p>
 

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { deletePost, getSingleUser, likePost } from '../../lib/api'
-import { getCurrentUserId, getToken, isAuthenticated, isAuthor } from '../../lib/auth'
+import { getCurrentUserId, isAuthenticated, isAuthor } from '../../lib/auth'
+import { useHistory } from 'react-router-dom'
 
 
 function PostSection({ title, userId, author, image, text, likedByArray, postId, handleUpdatePosts, setPopup1, setPopup, setPopupComment }) {
   const [likedNames, setLikedNames] = useState([])
   const [likeText, setLikeText] = useState('Like')
+  const history = useHistory()
 
 
   useEffect(() => {
@@ -17,7 +19,7 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
           const res = await getSingleUser(user)
           return res.data.username
         })))
-      } catch (e) {
+      } catch (err) {
         console.warn('Failed to fetch Author')
       }
     }
@@ -29,35 +31,37 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
   const handleLikePost = async (event) => {
     event.stopPropagation()
 
-    console.log('User passes Auth: ', isAuthenticated(), 'postId: ', postId, 'token: ', getToken())
+    if (!isAuthenticated()) {
+      history.push('/')
+    }
+
     try {
       const res = await likePost(postId)
       handleUpdatePosts(res.data)
-      // location.reload()
-    } catch (e) {
-      console.warn(e)
+
+    } catch (err) {
+      console.warn(err)
     }
-    console.log(likeText, 'd post of title: ', title)
+
   }
 
   const handleCommentPost = async (event) => {
     event.stopPropagation()
+    if (!isAuthenticated()) {
+      history.push('/')
+    }
     setPopup('modal')
     setPopupComment('modal is-active')
-    console.log('Commented post of title: ', title)
+
   }
 
-  // const handleSharePost = async (event) => {
-  //   event.stopPropagation()
-  //   console.log('Shared post of title: ', title)
 
-  // }
 
   const handleEditPost = async (event) => {
     event.stopPropagation()
     setPopup('modal')
     setPopup1('modal is-active')
-    console.log('Edtied post of title: ', title)
+
   }
 
   const handleDeletePost = async (event) => {
@@ -66,15 +70,14 @@ function PostSection({ title, userId, author, image, text, likedByArray, postId,
       const res = await deletePost(postId)
       handleUpdatePosts(res.data)
       location.reload()
-    } catch (e) {
-      console.warn(e)
+    } catch (err) {
+      console.warn(err)
     }
-    console.log('Deleted post of title: ', title)
+
 
   }
 
-  // console.log(likedByArray, getCurrentUserId())
-  // console.log('liked names: ', likedNames)
+
   return (
     <>
       <div className="card-header columns p-0 m-0">

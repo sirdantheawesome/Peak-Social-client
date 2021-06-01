@@ -12,8 +12,8 @@ function Login() {
     password: '',
   })
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (event) => {
+    event.preventDefault()
 
     try {
       const res = await loginUser(formdata)
@@ -60,7 +60,7 @@ function Login() {
           </p>
         )}
         <div className="field">
-          <button type="submit" className="button is-fullwidth is-info">
+          <button type="submit" className="button is-fullwidth is-warning">
             Log Me In!
           </button>
         </div>

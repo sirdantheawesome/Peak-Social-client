@@ -15,19 +15,18 @@ function Register() {
   })
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (event) => {
+    event.preventDefault()
     try {
       await registerUser(formdata)
       const res = await loginUser(formdata)
       setToken(res.data.token)
       history.push('/feed')
-    } catch (error) {
-      setFormErrors(error.response.data.errors)
+    } catch (err) {
+      setFormErrors(err.response.data.errors)
     }
   }
 
-  console.log(formdata)
 
   return (
 
@@ -100,7 +99,7 @@ function Register() {
           )}
         </div>
         <div className="field">
-          <button type="submit" className="button is-fullwidth is-info">
+          <button type="submit" className="button is-fullwidth is-warning">
             Register Me!
           </button>
         </div>

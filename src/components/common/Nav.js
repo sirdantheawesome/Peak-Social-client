@@ -14,8 +14,8 @@ function Nav({ setInput }) {
     history.push('/')
   }
 
-  const handleInput = (e) => {
-    setInput(e.target.value)
+  const handleInput = (event) => {
+    setInput(event.target.value)
 
   }
 

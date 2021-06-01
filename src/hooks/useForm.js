@@ -4,12 +4,12 @@ export function useForm(initialFormdata) {
   const [formdata, setFormdata] = React.useState(initialFormdata)
   const [formErrors, setFormErrors] = React.useState(initialFormdata)
 
-  const handleChange = e => {
-    setFormdata({ ...formdata, [e.target.name]: e.target.value })
-    setFormErrors({ ...formErrors, [e.target.name]: '' })
+  const handleChange = event => {
+    setFormdata({ ...formdata, [event.target.name]: event.target.value })
+    setFormErrors({ ...formErrors, [event.target.name]: '' })
   }
 
- 
+
 
   return {
     formdata,

@@ -25,7 +25,7 @@ function UserCard() {
         const response = await getSingleUser(userId)
 
         setFormdata(response.data)
-        console.log(response.data)
+        
       } catch (err) {
         console.log(err)
 
@@ -34,15 +34,15 @@ function UserCard() {
     getData()
   }, [userId, setFormdata, setFormErrors])
 
-  console.log(userId)
+  
 
   const handleClick = () => {
-    console.log('click')
+   
     setPopup('modal is-active')
   }
 
   const handleClose = () => {
-    console.log('close')
+    
     setPopup('modal')
   }
 
@@ -50,7 +50,7 @@ function UserCard() {
     event.preventDefault()
     try {
       await editUser(userId, formdata)
-      history.push('/feed')
+      location.reload()
     } catch (err) {
       setFormErrors(err.response.data.errors)
       console.log(formErrors)
@@ -64,23 +64,27 @@ function UserCard() {
     <div className="user-card">
       <div className="card-image">
         <figure className="image-container">
-          <img className="profile-image" src={formdata.image} alt={formdata.username} />
+          <img className="profile-image is-rounded" src={formdata.image} alt={formdata.username} />
         </figure>
       </div>
       <div className="content">
-        <p className="username">{formdata.username}</p> 
+        <p className="username">{formdata.username}</p>
         <p className="summary">{formdata.summary}</p>
         <p className="peekcoins">Peek Coins : {formdata.peekcoin}</p>
       </div>
       {isAuthor(userId) ?
-        <button className="button is-outlined" onClick={handleClick}>Edit Profile</button>
+        <button className="button is-warning" onClick={handleClick}>Edit Profile</button>
         :
         <div />
       }
       <div className={popup}>
-        <section className="modal-card-body">
-          <div className="modal"></div>
-          <div className="modal-content">
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Create a new post!</p>
+            <button onClick={handleClose} className="delete" aria-label="close"></button>
+          </header>
+          <section className="modal-card-body">
             <div className="field">
               <label className="label" htmlFor>Profile Name</label>
               <div className="control">
@@ -130,16 +134,17 @@ function UserCard() {
 
             <button
               onClick={handleClose}
-              className="delete"
-              aria-label="close" />
-            <button
+              className="button is-danger"
+              aria-label="close" >Cancel</button>
+            <button className="button"
               type="submit"
               onClick={handleSubmit}
             > Update Profile</button>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
+
 
   )
 }

@@ -10,7 +10,7 @@ function CommentCard({ text, userId, likedByArray }) {
       try {
         const res = await getSingleUser(userId)
         setAuthor(res.data)
-      } catch (e) {
+      } catch (err) {
         console.warn('Failed to fetch Author')
       }
     }
