@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { isAuthor } from '../../lib/auth'
 import { getSingleUser, editUser } from '../../lib/api'
 import { useForm } from '../../hooks/useForm'
@@ -14,7 +14,6 @@ function UserCard() {
     image: '',
     summary: '',
   })
-  const history = useHistory()
 
 
 
@@ -25,7 +24,7 @@ function UserCard() {
         const response = await getSingleUser(userId)
 
         setFormdata(response.data)
-        
+
       } catch (err) {
         console.log(err)
 
@@ -34,15 +33,15 @@ function UserCard() {
     getData()
   }, [userId, setFormdata, setFormErrors])
 
-  
+
 
   const handleClick = () => {
-   
+
     setPopup('modal is-active')
   }
 
   const handleClose = () => {
-    
+
     setPopup('modal')
   }
 
